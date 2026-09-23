@@ -25,7 +25,7 @@
 
 ## Links
 
-- **Proposal:** [`proposal/proposal.md`](proposal/proposal.md)
+- **Proposal:** [`proposal/proposal.md`](https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/blob/main/proposal/proposal.md)
 - **Project board:** 〈paste your Projects board URL〉
 - **Specifications:** [`docs/specs/`](docs/specs/) · **Designs:** [`docs/design/`](docs/design/)
 - **Prototype:** [`prototype/`](prototype/) — run instructions in its README
