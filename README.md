@@ -1,4 +1,4 @@
-# CPSC 490 — Group 〈N〉 〈Group Name〉
+# CPSC 490 — Group 〈15〉 〈HIBBI-01〉
 
 > **Copy this file to `README.md` in YOUR repository and fill it in.**
 > (In this example repository the root `README.md` is the setup guide, so the
