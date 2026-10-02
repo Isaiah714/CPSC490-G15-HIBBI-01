@@ -13,11 +13,11 @@
 | Name | GitHub | Role | Leader |
 |---|---|---|---|
 | 〈Last, First〉 | @〈username〉 | 〈e.g. backend, docs lead〉 | ✅ |
-| 〈Padilla, Isaiah〉 | @〈Isaiah714〉  | 〈lead〉 | |
-| 〈Qiu, Homan〉      | @〈NomMilk〉    | 〈…〉    | |
-| 〈Ayala, Brian〉    | @〈…〉          | 〈…〉    | |
-| 〈Cole, Brandon〉   | @〈dev-b-cole〉 | 〈docs〉 | |
-| 〈Morrel, Isaac〉   | @〈…〉          | 〈…〉    | |
+| 〈Padilla, Isaiah〉 | @〈Isaiah714〉     | 〈lead〉          | |
+| 〈Qiu, Homan〉      | @〈NomMilk〉       | 〈programmer〉    | |
+| 〈Ayala, Brian〉    | @〈BrianTheDevGuy〉| 〈programmer〉    | |
+| 〈Cole, Brandon〉   | @〈dev-b-cole〉    | 〈docs〉          | |
+| 〈Morrel, Isaac〉   | @〈1mphuls3〉      | 〈programmer〉    | |
 
 
 
