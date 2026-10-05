@@ -3,9 +3,9 @@
 **Department of Computer Science**
 **CPSC 490 Undergraduate Seminar in Computer Science — Proposal for Capstone Project**
 
-**Group 15 — HIBBI-01** · Sponsor: 〈independent〉
+**Group 15 — HIBBI-01** · Sponsor: independent
 Authors: Padilla, Isaiah (Isaiah714), Qiu, Homan (NomMilk), Ayala, Brian (BrianTheDevGuy), Cole, Brandon (dev-b-cole), Morrel, Isaac (1mphuls3)
-Date: 〈2026-09-22〉
+Date: 2026-09-22
 
 > **This file is the proposal document, not a README.** Its section numbers,
 > titles, and guidance are copied from the course Word template, so it
