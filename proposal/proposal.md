@@ -1,4 +1,4 @@
-# Project Proposal — Low Level Engine
+# Project Proposal — Constrained Hardware/ECS architecture Game Engine
 
 **Department of Computer Science**
 **CPSC 490 Undergraduate Seminar in Computer Science — Proposal for Capstone Project**
