@@ -88,16 +88,15 @@ Date: 2026-09-22
 
 ## 1. Introduction
 
-> Describe the necessary background on the project field to help the reader
-> understand the field. Assume the reader has B.S. degree in computer science
-> but not necessary knowledgeable in the selected area. You may also briefly
-> describe motivation of the project if any.
->
-> Specify the problem identified and to be solved in this project, the
-> importance or usefulness of the problem solving or project. Further
-> describes what makes your proposal different from existing ones.
+The video game industry is the largest and most profitable entertainment industry in the world and at the very heart of it is the game engine. The large video game studios either create their own custom game engines for their own specific needs, or they use commercial game engines. There are also indie developers, of which the vast majority use these commercial game engines. Most indie developers use low-end/constrained hardware. These commercial game engines are designed to handle a wide range of needs but also come with an overhead of features that require high specs. Traditional game engines use the Object-Oriented Programming (OOP) approach which has its strengths and weaknesses. We will be making a game engine that can be run on constrained hardware and will use the Entity-Component-System (ECS). We will make a game using this game engine that will showcase its use but also test and measure the performance with a lot of the same entities. We all have a love of video games and a passion for making video games. This passion has at times required the ability to purchase higher-end hardware that would otherwise not be required for other fields of computer science. Due to this, we know many others are out there, and many might not have the means to acquire the hardware to use these commercial game engines but still want to follow their passion.
 
-〈Your introduction.〉
+The importance of game engines is far more than just creating games; it sits between the hardware and the logic and manages resources. The game engine implements custom memory allocation instead of standard OS allocations so that data can be grabbed faster. It provides a unified API so that code doesn’t need to be rewritten for every specific device. It manages assets such as textures, 3D models, audio files and more. It also talks to graphics APIs to translate 3D coordinates into 2D pixels on the screen.
+
+Due to the vast number of features commercial game engines have and tasks they are built to do and the traditional engine architecture of OOD, it introduces bloat of features and hardware requirements that most users don’t need. These requirements include modern high-end CPUs, large amounts of ram capacity and memory bandwidth, dedicated GPUs, and large hard drive space.
+
+Entity-Component System architecture uses the Data-Oriented Design (DOD) instead of the OOD which is traditionally used in game engines. This architecture pattern for video games structures code DOD. While the traditional OOP approach has every entity in the world as an object, DOD separates data from logic. DOD just uses IDs and pure data structs. Same type components are stored contiguously and the system logic loops through the arrays sequentially. This helps with lowering hardware requirements.
+
+
 
 ### 1.1 Related Work
 
