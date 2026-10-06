@@ -1,11 +1,11 @@
-# Project Proposal — 〈3D Game〉
+# Project Proposal — Constrained Hardware/ECS architecture Game Engine
 
 **Department of Computer Science**
 **CPSC 490 Undergraduate Seminar in Computer Science — Proposal for Capstone Project**
 
-**Group 〈15〉 — 〈HIBBI-01〉** · Sponsor: 〈independent〉
-Authors: 〈Padilla, Isaiah (Isaiah714)〉, 〈lead〉
-Date: 〈2026-09-22〉
+**Group 15 — HIBBI-01** · Sponsor: independent
+Authors: Padilla, Isaiah (Isaiah714), Qiu, Homan (NomMilk), Ayala, Brian (BrianTheDevGuy), Cole, Brandon (dev-b-cole), Morrell, Isaac (1mphuls3)
+Date: 2026-09-22
 
 > **This file is the proposal document, not a README.** Its section numbers,
 > titles, and guidance are copied from the course Word template, so it
@@ -71,33 +71,32 @@ Date: 〈2026-09-22〉
 
 ## 0. Abstract
 
-> The primary purpose of abstract is to help the reader understand the main
-> message of current document (proposal in this case) without reading the
-> entire document. Therefore an abstract should include at least one or two
-> paragraph of background (or motivation) information for the project, a
-> brief description of the problem you are trying to solve in this proposal,
-> a proposed ideas or solutions, the significance of your proposed idea
-> elaborating why the proposed idea is non-trivial, significant, or
-> beneficial in one or two paragraphs, the project goals and outcomes in one
-> paragraph, and a brief description of what you will discuss in this
-> proposal, giving a brief outline of this document in 1-2 sentences in one
-> paragraph. Abstract should not exceed one page. Any abstract exceeded
-> one-page limit must be shortened.
+	Game engines play an important role in modern game development by providing the systems responsible for rendering, resource management, memory handling, and the execution of game logic. However, many existing engines are designed to support a broad range of applications and platforms, which can result in significant resource requirements. This can create difficulties for developers specificly working with resource-constrained hardware. At the same time, the way a game engine organizes and processes its data can have a substantial effect on performance, particularly when a game must manage large numbers of entities simultaneously.
 
-〈Your abstract. Write it last.〉
+	The proposed project is a low-level game engine built around older hardware with an Entity Component System (ECS) architecture. The engine will provide direct control over fundamental rendering and game systems while avoiding dependencies on graphics features introduced in later versions of OpenGL. The ECS will organize game data into entities, components, and systems rather than relying primarily on traditional object-oriented game objects. This approach is significant because it introduces data-oriented design and improved memory locality while operating within the limitations of an older graphics API. Implementing these systems together is non-trivial because the engine must balance compatibility, performance, memory management, and modularity without relying on modern graphics functionality.
+
+	The primary goals of the project are to develop a functional rendering system, implement an ECS capable of efficiently processing game entities, and create a way for user of the applications to create their own games. The expected outcome is a lightweight engine uses modern architectural techniques to improve performance while maintaining support for legacy hardware. The project will also evaluate the performance and limitations of the ECS architecture approach through testing and example applications.
+The remainder of this document describes the background and motivation for the project, the proposed engine architecture and technologies.
 
 ## 1. Introduction
 
-> Describe the necessary background on the project field to help the reader
-> understand the field. Assume the reader has B.S. degree in computer science
-> but not necessary knowledgeable in the selected area. You may also briefly
-> describe motivation of the project if any.
->
-> Specify the problem identified and to be solved in this project, the
-> importance or usefulness of the problem solving or project. Further
-> describes what makes your proposal different from existing ones.
+The video game industry is the largest and most profitable entertainment industry in the world and at the very heart of it is the game engine. The large video game studios either create their own custom game engines for their own specific needs, or they use commercial game engines. There are also indie developers, of which the vast majority use these commercial game engines. Most indie developers use low-end/constrained hardware. These commercial game engines are designed to handle a wide range of needs but also come with an overhead of features that require high specs. Traditional game engines use the Object-Oriented Programming (OOP) approach which has its strengths and weaknesses. We will be making a game engine that can be run on constrained hardware and will use the Entity-Component-System (ECS). We will make a game using this game engine that will showcase its use but also test and measure the performance with a lot of the same entities. We all have a love of video games and a passion for making video games. This passion has at times required the ability to purchase higher-end hardware that would otherwise not be required for other fields of computer science. Due to this, we know many others are out there, and many might not have the means to acquire the hardware to use these commercial game engines but still want to follow their passion.
 
-〈Your introduction.〉
+The importance of game engines is far more than just creating games; it sits between the hardware and the logic and manages resources. The game engine implements custom memory allocation instead of standard OS allocations so that data can be grabbed faster. It provides a unified API so that code doesn’t need to be rewritten for every specific device. It manages assets such as textures, 3D models, audio files and more. It also talks to graphics APIs to translate 3D coordinates into 2D pixels on the screen.
+
+Due to the vast number of features commercial game engines have and tasks they are built to do and the traditional engine architecture of OOD, it introduces bloat of features and hardware requirements that most users don’t need. These requirements include modern high-end CPUs, large amounts of ram capacity and memory bandwidth, dedicated GPUs, and large hard drive space.
+
+Entity-Component System architecture uses the Data-Oriented Design (DOD) instead of the OOD which is traditionally used in game engines. This architecture pattern for video games structures code DOD. While the traditional OOP approach has every entity in the world as an object, DOD separates data from logic. DOD just uses IDs and pure data structs. Same type components are stored contiguously and the system logic loops through the arrays sequentially. This helps with lowering hardware requirements.
+
+As game simulations become more complex, the performance of the architecture used to represent and update the game objects within those simulations becomes an important design choice in developing a game. This is especially relevant as the number of entities simulated increases. A single entity may only perform trivial calculations, like updating position, state, AI, or health, when scaled up into the hundreds or thousands, that becomes tons of data the CPU needs to read from and write to every frame.
+
+These performance considerations are specifically relevant on resource constrained hardware, where limited processing and memory resources can make inefficient data access and computations more apparent. Although modern hardware can compensate for inefficient implementations through pure processing power, not all systems have this level of computational headroom. Understanding how software architecture affects performance under these constraints is important to understand game development and the broader study of data oriented design.
+
+The project aims to analyze the performance of an Entity Component System (ECS) architecture when used for an entity dense game running on constrained hardware. Rather than a general purpose game engine, the project will implement a small specialized engine designed to support a single game project, which will act as a controlled environment where a large number of entities could be simulated and the performance can be measured and compared.
+
+The benefits associated with ECS and Data Oriented Design are dependent on the specific workload and implementation of ECS. An architecture that performs well for one type of application or on one type of hardware may provide less benefit under different conditions. The project attempts to measure and evaluate the performance of ECS under an entity heavy game workload, in order to provide insight into when ECS architecture is beneficial and when its advantages may not be significant.
+
+Our project approach differs from general purpose and commercial game engines because it aims to prioritize controlled performance over functionality breadth. While those commercial engines need to implement all functions necessary to support many types of games, platforms, and even other non-game r, our engine will implement only the systems needed to support our game and workload. This allows us to focus on the ECS architecture itself, in order to maintain and measure performance levels necessary for resource constrained hardware conditions. The final product will consist of a functional game which functions as a demonstration and repeatable workload to benchmark and analyze the performance of ECS architecture.
 
 ### 1.1 Related Work
 
