@@ -71,20 +71,12 @@ Date: 2026-09-22
 
 ## 0. Abstract
 
-> The primary purpose of abstract is to help the reader understand the main
-> message of current document (proposal in this case) without reading the
-> entire document. Therefore an abstract should include at least one or two
-> paragraph of background (or motivation) information for the project, a
-> brief description of the problem you are trying to solve in this proposal,
-> a proposed ideas or solutions, the significance of your proposed idea
-> elaborating why the proposed idea is non-trivial, significant, or
-> beneficial in one or two paragraphs, the project goals and outcomes in one
-> paragraph, and a brief description of what you will discuss in this
-> proposal, giving a brief outline of this document in 1-2 sentences in one
-> paragraph. Abstract should not exceed one page. Any abstract exceeded
-> one-page limit must be shortened.
+	Game engines play an important role in modern game development by providing the systems responsible for rendering, resource management, memory handling, and the execution of game logic. However, many existing engines are designed to support a broad range of applications and platforms, which can result in significant resource requirements. This can create difficulties for developers specificly working with resource-constrained hardware. At the same time, the way a game engine organizes and processes its data can have a substantial effect on performance, particularly when a game must manage large numbers of entities simultaneously.
 
-〈Your abstract. Write it last.〉
+	The proposed project is a low-level game engine built around older hardware with an Entity Component System (ECS) architecture. The engine will provide direct control over fundamental rendering and game systems while avoiding dependencies on graphics features introduced in later versions of OpenGL. The ECS will organize game data into entities, components, and systems rather than relying primarily on traditional object-oriented game objects. This approach is significant because it introduces data-oriented design and improved memory locality while operating within the limitations of an older graphics API. Implementing these systems together is non-trivial because the engine must balance compatibility, performance, memory management, and modularity without relying on modern graphics functionality.
+
+	The primary goals of the project are to develop a functional rendering system, implement an ECS capable of efficiently processing game entities, and create a way for user of the applications to create their own games. The expected outcome is a lightweight engine uses modern architectural techniques to improve performance while maintaining support for legacy hardware. The project will also evaluate the performance and limitations of the ECS architecture approach through testing and example applications.
+The remainder of this document describes the background and motivation for the project, the proposed engine architecture and technologies.
 
 ## 1. Introduction
 
