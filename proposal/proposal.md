@@ -100,28 +100,16 @@ Our project approach differs from general purpose and commercial game engines be
 
 ### 1.1 Related Work
 
-> Describe the related or existing work in detail. This section is like a
-> survey on the selected problem or topic.
-
-〈Your survey. Cite with bracketed numbers matching §8 — every reference must
-be a source your team has actually read.〉
-
-**Do a comparative analysis, not a list of summaries.** Find the existing
-ideas, products, papers, or tools that attack the same problem and compare
-them against each other on the dimensions that matter for your project, with
-honest pros and cons. Then say plainly what your project does differently and
-why that difference is worth the effort.
-
 | Existing approach | What it does | Pros | Cons | Why ours differs |
 |---|---|---|---|---|
-| 〈product / paper [1]〉 | 〈…〉 | 〈…〉 | 〈…〉 | 〈…〉 |
-| 〈product / paper [2]〉 | 〈…〉 | 〈…〉 | 〈…〉 | 〈…〉 |
-| 〈product / paper [3]〉 | 〈…〉 | 〈…〉 | 〈…〉 | 〈…〉 |
+| Unity [1] | General game engine with advanced features such as pathfinding. | Extremely feature rich, well documented and supported. | More bloated compared to other frameworks. | It would be more optimized due to Unity having to support multiple hardware. In addition, our engine would be more leaner and in theory take up less space than Unity. |
+| Flecs [2] | Lightweight ECS framework library | Feature rich ECS implementation, archetype storage | Does not implement game engine functionality itself | Combine ECS system with rendering, input, and other infrastructure to develop a  |
+| EnTT [3] | Lightweight C++ ECS library | Simple API, flexible component management | Does not implement game engine functionality itself | Combine ECS system with rendering, input, and other infrastructure to develop a game |
+| MonoGame [4] | Code first game development framework, including graphics, audio, and input | Flexible, relatively low level | Developers may need to implement additional tooling for their project | A more integrated ECS based runtime and lightweight editor and tooling foundation |
 
-〈Discuss the table in prose — the table is evidence, the paragraph is the
-argument. "Nothing like this exists" is almost never true and reads as a
-missing survey; if a close competitor exists, say so and explain why you are
-still building this.〉
+There are currently many different general use engines that developers can currently take advantage of such as Unity, Unreal, and Godot. These engines are aimed to be versatile and are able to be compiled to multiple different platforms, with Unity able to complied to 17 different platforms [1]. Ours will be different in that it would be targeted towards low-end and old 64-bit x86-64 processors around the late 2000’s range. By narrowing our scope we are able to create a much more performant game compared to those offered by general use engines. As the more compatible an engine is the more they have to give up in storage and performance.
+Frameworks like MonoGame also offer an alternative to full fledged game engine and editor applications like Unity. The tool provides developers foundational game programming capabilities while allowing more control over structure and implementation [2]. That flexibility can be valuable to developers who want a code first workflow, or want to avoid features they do not need in their project. However, developers may need to implement additional systems for a complete game development workflow, such as a visual scene editor which MonoGame does not include by default. Our proposed engine project aims to create a more integrated runtime and foundation without resource intensive tooling of a general purpose game engine.
+ECS frameworks can be a more direct comparison to our project. Libraries like Flecs and EnTT provide ECS functionality that can be integrated into larger applications and provide developers flexibility in constructing their own systems around them [3], [4]. However, an ECS library on its own doesn’t provide the systems required to create a fully functioning game. Developers would still need to implement rendering functionality, input system, resource loading, and more. Our project would reduce the burden of integration by combining ECS systems with foundational game engine functionality and services for developers to build off of.
 
 ### 1.2 Problem Statements
 
@@ -139,8 +127,8 @@ is what the final project report is graded against.
 
 | Problem | Addressed by |
 |---|---|
-| P1 〈one line〉 | 〈Goal 1 (#n)〉 |
-| P2 〈one line〉 | 〈Goal 2 (#n)〉 |
+| P1 Giving the developers an idea of the core features in the proposed game development framework can be challenging, particularly when showcasing its rendering capabilities, interactive gameplay, and world creation features. A functional demo is needed to validate the framework's usability, demonstrate its performance, and illustrate what developers can achieve in our proposed engine. | Game Demo (#n) |
+| P2 Developers looking for lightweight adaptable game development frameworks face trade-offs with lower level tools that may require substantial custom implementation and comprehensive game engines that provide more functionality than necessary for a project. This creates a need for a framework that supports efficient game development, cross platform compatibility, flexible rendering, and accessible world creation | Game Engine (#n) |
 
 ## 2. Goals and Objectives
 
@@ -332,14 +320,7 @@ what fraction of each artifact was AI-assisted, and how you verified it.〉
 
 ## 8. References
 
-> [1] Burges, C. J. C. Tutorial on Support Vector Machines for Pattern
-> Recognition. Kluwer Academic Publishers, 1998.
-> [2] Chen, P., Fan, R., and Lin, C. A study on SMO-type decomposition
-> methods for support vector machines. IEEE Transactions on Neural Networks,
-> 2006.
-> [3] For Wikipedia, specify the URL here
-> [4] For a web source, specify the URL here plus date accessed
-
-〈Number references in the order first cited and cite them in the text as
-[1], [2]. Every entry must be a source a team member has actually read and
-can produce on request.〉
+[1] https://www.gamesindustry.biz/what-is-the-best-game-engine-is-unity-the-right-game-engine-for-you. Oct 11, 2026
+[2] https://monogame.net/. Oct 11, 2026
+[3] https://www.flecs.dev/flecs/. Oct 11, 2026
+[4] https://github.com/skypjack/entt. Oct 11, 2026
