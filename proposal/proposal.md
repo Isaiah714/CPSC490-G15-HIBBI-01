@@ -157,6 +157,22 @@ is what the final project report is graded against.
 > metric to evaluate whether or not you successfully finished your project
 > when you turn in your final project report.
 
+Write each objective the way the guidance above asks — **an action word plus
+the measure that says it is done**, not a role-play sentence:
+
+- **Goal 1: 〈Game Demo〉** (Epic #25)
+  - Objective 1.1: Implement engaging enemies for players to interact with (#〈26〉)
+  - Objective 1.2: Create a gameplay loop for a fun and interactive user experience (#〈27〉)
+  - Objective 1.3: Implement player inputs and level interaction (#〈28〉)
+  - Objective 1.4: Design and implement immersive world building (#〈29〉)
+- **Goal 2: 〈your second goal〉** (Epic #〈24〉)
+  - Objective 2.1: Implement ECS architecture for the engine. (#〈30〉)
+  - Objective 2.2: Demonstrate multiplatform compilation. (#〈31〉)
+  - Objective 2.3: Create an adaptable real time render system. (#〈32〉)
+  - Objective 2.4: Implement visual editor to import models, create objects, and design the game world. (#〈33〉)
+
+
+
 Each **goal** is tracked as an **Epic** issue and each **objective** as a
 **User Story** issue in the team repository (see the setup guide's *Epics and user stories* section).
 **Every epic and user story in the repository is linked from this section** —
