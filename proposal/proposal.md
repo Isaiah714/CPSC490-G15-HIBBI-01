@@ -71,58 +71,45 @@ Date: 2026-09-22
 
 ## 0. Abstract
 
-> The primary purpose of abstract is to help the reader understand the main
-> message of current document (proposal in this case) without reading the
-> entire document. Therefore an abstract should include at least one or two
-> paragraph of background (or motivation) information for the project, a
-> brief description of the problem you are trying to solve in this proposal,
-> a proposed ideas or solutions, the significance of your proposed idea
-> elaborating why the proposed idea is non-trivial, significant, or
-> beneficial in one or two paragraphs, the project goals and outcomes in one
-> paragraph, and a brief description of what you will discuss in this
-> proposal, giving a brief outline of this document in 1-2 sentences in one
-> paragraph. Abstract should not exceed one page. Any abstract exceeded
-> one-page limit must be shortened.
+	Game engines play an important role in modern game development by providing the systems responsible for rendering, resource management, memory handling, and the execution of game logic. However, many existing engines are designed to support a broad range of applications and platforms, which can result in significant resource requirements. This can create difficulties for developers specificly working with resource-constrained hardware. At the same time, the way a game engine organizes and processes its data can have a substantial effect on performance, particularly when a game must manage large numbers of entities simultaneously.
 
-〈Your abstract. Write it last.〉
+	The proposed project is a low-level game engine built around older hardware with an Entity Component System (ECS) architecture. The engine will provide direct control over fundamental rendering and game systems while avoiding dependencies on graphics features introduced in later versions of OpenGL. The ECS will organize game data into entities, components, and systems rather than relying primarily on traditional object-oriented game objects. This approach is significant because it introduces data-oriented design and improved memory locality while operating within the limitations of an older graphics API. Implementing these systems together is non-trivial because the engine must balance compatibility, performance, memory management, and modularity without relying on modern graphics functionality.
+
+	The primary goals of the project are to develop a functional rendering system, implement an ECS capable of efficiently processing game entities, and create a way for user of the applications to create their own games. The expected outcome is a lightweight engine uses modern architectural techniques to improve performance while maintaining support for legacy hardware. The project will also evaluate the performance and limitations of the ECS architecture approach through testing and example applications.
+The remainder of this document describes the background and motivation for the project, the proposed engine architecture and technologies.
 
 ## 1. Introduction
 
-> Describe the necessary background on the project field to help the reader
-> understand the field. Assume the reader has B.S. degree in computer science
-> but not necessary knowledgeable in the selected area. You may also briefly
-> describe motivation of the project if any.
->
-> Specify the problem identified and to be solved in this project, the
-> importance or usefulness of the problem solving or project. Further
-> describes what makes your proposal different from existing ones.
+The video game industry is the largest and most profitable entertainment industry in the world and at the very heart of it is the game engine. The large video game studios either create their own custom game engines for their own specific needs, or they use commercial game engines. There are also indie developers, of which the vast majority use these commercial game engines. Most indie developers use low-end/constrained hardware. These commercial game engines are designed to handle a wide range of needs but also come with an overhead of features that require high specs. Traditional game engines use the Object-Oriented Programming (OOP) approach which has its strengths and weaknesses. We will be making a game engine that can be run on constrained hardware and will use the Entity-Component-System (ECS). We will make a game using this game engine that will showcase its use but also test and measure the performance with a lot of the same entities. We all have a love of video games and a passion for making video games. This passion has at times required the ability to purchase higher-end hardware that would otherwise not be required for other fields of computer science. Due to this, we know many others are out there, and many might not have the means to acquire the hardware to use these commercial game engines but still want to follow their passion.
 
-〈Your introduction.〉
+The importance of game engines is far more than just creating games; it sits between the hardware and the logic and manages resources. The game engine implements custom memory allocation instead of standard OS allocations so that data can be grabbed faster. It provides a unified API so that code doesn’t need to be rewritten for every specific device. It manages assets such as textures, 3D models, audio files and more. It also talks to graphics APIs to translate 3D coordinates into 2D pixels on the screen.
+
+Due to the vast number of features commercial game engines have and tasks they are built to do and the traditional engine architecture of OOD, it introduces bloat of features and hardware requirements that most users don’t need. These requirements include modern high-end CPUs, large amounts of ram capacity and memory bandwidth, dedicated GPUs, and large hard drive space.
+
+Entity-Component System architecture uses the Data-Oriented Design (DOD) instead of the OOD which is traditionally used in game engines. This architecture pattern for video games structures code DOD. While the traditional OOP approach has every entity in the world as an object, DOD separates data from logic. DOD just uses IDs and pure data structs. Same type components are stored contiguously and the system logic loops through the arrays sequentially. This helps with lowering hardware requirements.
+
+As game simulations become more complex, the performance of the architecture used to represent and update the game objects within those simulations becomes an important design choice in developing a game. This is especially relevant as the number of entities simulated increases. A single entity may only perform trivial calculations, like updating position, state, AI, or health, when scaled up into the hundreds or thousands, that becomes tons of data the CPU needs to read from and write to every frame.
+
+These performance considerations are specifically relevant on resource constrained hardware, where limited processing and memory resources can make inefficient data access and computations more apparent. Although modern hardware can compensate for inefficient implementations through pure processing power, not all systems have this level of computational headroom. Understanding how software architecture affects performance under these constraints is important to understand game development and the broader study of data oriented design.
+
+The project aims to analyze the performance of an Entity Component System (ECS) architecture when used for an entity dense game running on constrained hardware. Rather than a general purpose game engine, the project will implement a small specialized engine designed to support a single game project, which will act as a controlled environment where a large number of entities could be simulated and the performance can be measured and compared.
+
+The benefits associated with ECS and Data Oriented Design are dependent on the specific workload and implementation of ECS. An architecture that performs well for one type of application or on one type of hardware may provide less benefit under different conditions. The project attempts to measure and evaluate the performance of ECS under an entity heavy game workload, in order to provide insight into when ECS architecture is beneficial and when its advantages may not be significant.
+
+Our project approach differs from general purpose and commercial game engines because it aims to prioritize controlled performance over functionality breadth. While those commercial engines need to implement all functions necessary to support many types of games, platforms, and even other non-game r, our engine will implement only the systems needed to support our game and workload. This allows us to focus on the ECS architecture itself, in order to maintain and measure performance levels necessary for resource constrained hardware conditions. The final product will consist of a functional game which functions as a demonstration and repeatable workload to benchmark and analyze the performance of ECS architecture.
 
 ### 1.1 Related Work
 
-> Describe the related or existing work in detail. This section is like a
-> survey on the selected problem or topic.
-
-〈Your survey. Cite with bracketed numbers matching §8 — every reference must
-be a source your team has actually read.〉
-
-**Do a comparative analysis, not a list of summaries.** Find the existing
-ideas, products, papers, or tools that attack the same problem and compare
-them against each other on the dimensions that matter for your project, with
-honest pros and cons. Then say plainly what your project does differently and
-why that difference is worth the effort.
-
 | Existing approach | What it does | Pros | Cons | Why ours differs |
 |---|---|---|---|---|
-| 〈product / paper [1]〉 | 〈…〉 | 〈…〉 | 〈…〉 | 〈…〉 |
-| 〈product / paper [2]〉 | 〈…〉 | 〈…〉 | 〈…〉 | 〈…〉 |
-| 〈product / paper [3]〉 | 〈…〉 | 〈…〉 | 〈…〉 | 〈…〉 |
+| Unity [1] | General game engine with advanced features such as pathfinding. | Extremely feature rich, well documented and supported. | More bloated compared to other frameworks. | It would be more optimized due to Unity having to support multiple hardware. In addition, our engine would be more leaner and in theory take up less space than Unity. |
+| Flecs [2] | Lightweight ECS framework library | Feature rich ECS implementation, archetype storage | Does not implement game engine functionality itself | Combine ECS system with rendering, input, and other infrastructure to develop a  |
+| EnTT [3] | Lightweight C++ ECS library | Simple API, flexible component management | Does not implement game engine functionality itself | Combine ECS system with rendering, input, and other infrastructure to develop a game |
+| MonoGame [4] | Code first game development framework, including graphics, audio, and input | Flexible, relatively low level | Developers may need to implement additional tooling for their project | A more integrated ECS based runtime and lightweight editor and tooling foundation |
 
-〈Discuss the table in prose — the table is evidence, the paragraph is the
-argument. "Nothing like this exists" is almost never true and reads as a
-missing survey; if a close competitor exists, say so and explain why you are
-still building this.〉
+There are currently many different general use engines that developers can currently take advantage of such as Unity, Unreal, and Godot. These engines are aimed to be versatile and are able to be compiled to multiple different platforms, with Unity able to complied to 17 different platforms [1]. Ours will be different in that it would be targeted towards low-end and old 64-bit x86-64 processors around the late 2000’s range. By narrowing our scope we are able to create a much more performant game compared to those offered by general use engines. As the more compatible an engine is the more they have to give up in storage and performance.
+Frameworks like MonoGame also offer an alternative to full fledged game engine and editor applications like Unity. The tool provides developers foundational game programming capabilities while allowing more control over structure and implementation [2]. That flexibility can be valuable to developers who want a code first workflow, or want to avoid features they do not need in their project. However, developers may need to implement additional systems for a complete game development workflow, such as a visual scene editor which MonoGame does not include by default. Our proposed engine project aims to create a more integrated runtime and foundation without resource intensive tooling of a general purpose game engine.
+ECS frameworks can be a more direct comparison to our project. Libraries like Flecs and EnTT provide ECS functionality that can be integrated into larger applications and provide developers flexibility in constructing their own systems around them [3], [4]. However, an ECS library on its own doesn’t provide the systems required to create a fully functioning game. Developers would still need to implement rendering functionality, input system, resource loading, and more. Our project would reduce the burden of integration by combining ECS systems with foundational game engine functionality and services for developers to build off of.
 
 ### 1.2 Problem Statements
 
@@ -317,14 +304,7 @@ what fraction of each artifact was AI-assisted, and how you verified it.〉
 
 ## 8. References
 
-> [1] Burges, C. J. C. Tutorial on Support Vector Machines for Pattern
-> Recognition. Kluwer Academic Publishers, 1998.
-> [2] Chen, P., Fan, R., and Lin, C. A study on SMO-type decomposition
-> methods for support vector machines. IEEE Transactions on Neural Networks,
-> 2006.
-> [3] For Wikipedia, specify the URL here
-> [4] For a web source, specify the URL here plus date accessed
-
-〈Number references in the order first cited and cite them in the text as
-[1], [2]. Every entry must be a source a team member has actually read and
-can produce on request.〉
+[1] https://www.gamesindustry.biz/what-is-the-best-game-engine-is-unity-the-right-game-engine-for-you. Oct 11, 2026
+[2] https://monogame.net/. Oct 11, 2026
+[3] https://www.flecs.dev/flecs/. Oct 11, 2026
+[4] https://github.com/skypjack/entt. Oct 11, 2026
