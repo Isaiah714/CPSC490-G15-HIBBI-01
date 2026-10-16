@@ -127,8 +127,8 @@ is what the final project report is graded against.
 
 | Problem | Addressed by |
 |---|---|
-| P1 〈one line〉 | 〈Goal 1 (#n)〉 |
-| P2 〈one line〉 | 〈Goal 2 (#n)〉 |
+| P1 Giving the developers an idea of the core features in the proposed game development framework can be challenging, particularly when showcasing its rendering capabilities, interactive gameplay, and world creation features. A functional demo is needed to validate the framework's usability, demonstrate its performance, and illustrate what developers can achieve in our proposed engine. | Game Demo (#n) |
+| P2 Developers looking for lightweight adaptable game development frameworks face trade-offs with lower level tools that may require substantial custom implementation and comprehensive game engines that provide more functionality than necessary for a project. This creates a need for a framework that supports efficient game development, cross platform compatibility, flexible rendering, and accessible world creation | Game Engine (#n) |
 
 ## 2. Goals and Objectives
 
