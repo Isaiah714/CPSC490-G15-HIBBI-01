@@ -1,27 +1,20 @@
-# CPSC 490 — Group 〈15〉 〈HIBBI-01〉
+# CPSC 490 — Group 15 HIBBI-01
 
-> **Copy this file to `README.md` in YOUR repository and fill it in.**
-> (In this example repository the root `README.md` is the setup guide, so the
-> team README model lives here.)
-
-**Project title:** 〈3D Game〉
-**Sponsor:** 〈independent〉
-**Section:** 〈05 (Thu)〉
+**Project title:** Constrained Hardware/ECS Architecture Game Engine
+**Sponsor:** Independent
+**Section:** 05 (Thu)
 
 ## Team HIBBI-01
 
 | Name | GitHub | Role | Leader |
 |---|---|---|---|
-| 〈Last, First〉 | @〈username〉 | 〈e.g. backend, docs lead〉 | ✅ |
-| 〈Padilla, Isaiah〉 | @〈Isaiah714〉     | 〈lead〉          | |
-| 〈Qiu, Homan〉      | @〈NomMilk〉       | 〈programmer〉    | |
-| 〈Ayala, Brian〉    | @〈BrianTheDevGuy〉| 〈programmer〉    | |
-| 〈Cole, Brandon〉   | @〈dev-b-cole〉    | 〈docs〉          | |
-| 〈Morrel, Isaac〉   | @〈1mphuls3〉      | 〈programmer〉    | |
+| Padilla, Isaiah | @Isaiah714 | lead | ✅ |
+| Qiu, Homan | @NomMilk | programmer | |
+| Ayala, Brian | @BrianTheDevGuy| programmer | |
+| Cole, Brandon | @dev-b-cole | docs | |
+| Morrel, Isaac | @1mphuls3 | programmer | |
 
-
-
-**Contact person:** 〈Isaiah Padilla〉 — 〈Ip714@csu.fullerton.edu〉
+**Contact person:** Isaiah Padilla — Ip714@csu.fullerton.edu
 
 ## Links
 
