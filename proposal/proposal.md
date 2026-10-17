@@ -113,18 +113,6 @@ ECS frameworks can be a more direct comparison to our project. Libraries like Fl
 
 ### 1.2 Problem Statements
 
-> Briefly state the problem to solve in this project.
-
-〈Your problem statement(s), **concise** — a few sentences each, no
-background (that was §1) and no solution (that is §3). Number them P1, P2, …
-so later sections can refer back.〉
-
-**Every problem here must connect to the goals and objectives in §2, and
-every goal in §2 must trace back to a problem here.** A goal with no problem
-behind it is scope you invented; a problem with no goal is a problem you are
-not actually solving. Check both directions before you submit — this mapping
-is what the final project report is graded against.
-
 | Problem | Addressed by |
 |---|---|
 | P1 Giving the developers an idea of the core features in the proposed game development framework can be challenging, particularly when showcasing its rendering capabilities, interactive gameplay, and world creation features. A functional demo is needed to validate the framework's usability, demonstrate its performance, and illustrate what developers can achieve in our proposed engine. | Game Demo (#n) |
@@ -132,59 +120,16 @@ is what the final project report is graded against.
 
 ## 2. Goals and Objectives
 
-> Describe goals and objectives. Goals are general statements of what you are
-> trying to accomplish with the project or problems to solve. Objectives are
-> specific, measurable statements of what you want to complete to reach the
-> project goals. Most projects have 2-3 goals.
->
-> List the objectives for each goal. To write objectives, look at the goal
-> statement and list what you need to complete using action words like use
-> case names in order to meet the goal.
->
-> Note that the goals and objectives in a proposal will be an important
-> metric to evaluate whether or not you successfully finished your project
-> when you turn in your final project report.
-
-Write each objective the way the guidance above asks — **an action word plus
-the measure that says it is done**, not a role-play sentence:
-
-- **Goal 1: 〈Game Demo〉** (Epic #25)
-  - Objective 1.1: Implement engaging enemies for players to interact with (#〈26〉)
-  - Objective 1.2: Create a gameplay loop for a fun and interactive user experience (#〈27〉)
-  - Objective 1.3: Implement player inputs and level interaction (#〈28〉)
-  - Objective 1.4: Design and implement immersive world building (#〈29〉)
-- **Goal 2: 〈your second goal〉** (Epic #〈24〉)
-  - Objective 2.1: Implement ECS architecture for the engine. (#〈30〉)
-  - Objective 2.2: Demonstrate multiplatform compilation. (#〈31〉)
-  - Objective 2.3: Create an adaptable real time render system. (#〈32〉)
-  - Objective 2.4: Implement visual editor to import models, create objects, and design the game world. (#〈33〉)
-
-
-
-Each **goal** is tracked as an **Epic** issue and each **objective** as a
-**User Story** issue in the team repository (see the setup guide's *Epics and user stories* section).
-**Every epic and user story in the repository is linked from this section** —
-CI gate G8 fails if one exists that this section does not link. That is what
-keeps the goals in this document and the work on the board from drifting
-apart.
-
-Write each objective the way the guidance above asks — **an action word plus
-the measure that says it is done**, not a role-play sentence:
-
-- **Goal 1: 〈e.g. Secure account management〉** (Epic #〈n〉)
-  - Objective 1.1: 〈Implement member registration and login with hashed
-    credentials, session expiry, and rejection of malformed input.〉 (#〈n〉)
-  - Objective 1.2: 〈Demonstrate the login round-trip in a runnable prototype
-    at the Week-8 in-class check.〉 (#〈n〉)
-- **Goal 2: 〈your second goal〉** (Epic #〈n〉)
-  - Objective 2.1: 〈Action word + what you will complete + how it will be
-    measured〉 (#〈n〉)
-
-〈Replace the brackets with your own 2–3 goals and their objectives, and put
-the **real issue numbers** in as you file them — gate G8 checks that every
-epic and story in your repository is linked from this section. A fully worked
-version of this, with live issues and a populated board, is in the course
-example repository.〉
+- **Goal 1: 〈Game Demo〉** [epic:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]
+  - Objective 1.1: Implement engaging enemies for players to interact with [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/26]
+  - Objective 1.2: Create a gameplay loop for a fun and interactive user experience [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/27]
+  - Objective 1.3: Implement player inputs and level interaction [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/28]
+  - Objective 1.4: Design and implement immersive world building [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/29]
+- **Goal 2: 〈Game Engine〉** [epic:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]
+  - Objective 2.1: Implement ECS architecture for the engine. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/30]
+  - Objective 2.2: Demonstrate multiplatform compilation. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/31]
+  - Objective 2.3: Create an adaptable real time render system. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/32]
+  - Objective 2.4: Implement visual editor to import models, create objects, and design the game world. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/33]
 
 ## 3. Proposed Approaches
 
@@ -261,8 +206,8 @@ G8 fails if such an issue exists that this section does not link.
 
 | Issue | Type | Activity | Parent | Owner | Sprint |
 |---|---|---|---|---|---|
-| 〈#n〉 | 〈task〉 | 〈stand up the prototype login endpoint〉 | 〈#story〉 | 〈owner〉 | 〈Sprint 1〉 |
-| 〈#n〉 | 〈feature/enhancement/bug/task/sub-task〉 | 〈…〉 | 〈#story〉 | 〈…〉 | 〈…〉 |
+| 〈#9〉 | 〈task〉 | 〈Window and Renderer〉 | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/32] | 〈Isaiah〉 | 〈Sprint 2〉 |
+
 
 〈Replace these rows with your own, and keep the table current as you file new
 issues — with §2 it gives a reader every planned activity in one place, each
