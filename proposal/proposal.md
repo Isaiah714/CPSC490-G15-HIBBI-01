@@ -120,16 +120,16 @@ ECS frameworks can be a more direct comparison to our project. Libraries like Fl
 
 ## 2. Goals and Objectives
 
-- **Goal 1: 〈Game Demo〉** [epic:#25][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]
-  - Objective 1.1: Implement engaging enemies for players to interact with [story:#26][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/26]
-  - Objective 1.2: Create a gameplay loop for a fun and interactive user experience [story:#27][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/27]
-  - Objective 1.3: Implement player inputs and level interaction [story:#28][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/28]
-  - Objective 1.4: Design and implement immersive world building [story:#29][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/29]
-- **Goal 2: 〈Game Engine〉** [epic:#24][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]
-  - Objective 2.1: Implement ECS architecture for the engine. [story:#30][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/30]
-  - Objective 2.2: Demonstrate multiplatform compilation. [story:#31][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/31]
-  - Objective 2.3: Create an adaptable real time render system. [story:#32][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/32]
-  - Objective 2.4: Implement visual editor to import models, create objects, and design the game world. [story:#33][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/33]
+- **Goal 1: 〈Game Demo〉** [epic:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]
+  - Objective 1.1: Implement engaging enemies for players to interact with [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/26]
+  - Objective 1.2: Create a gameplay loop for a fun and interactive user experience [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/27]
+  - Objective 1.3: Implement player inputs and level interaction [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/28]
+  - Objective 1.4: Design and implement immersive world building [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/29]
+- **Goal 2: 〈Game Engine〉** [epic:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]
+  - Objective 2.1: Implement ECS architecture for the engine. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/30]
+  - Objective 2.2: Demonstrate multiplatform compilation. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/31]
+  - Objective 2.3: Create an adaptable real time render system. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/32]
+  - Objective 2.4: Implement visual editor to import models, create objects, and design the game world. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/33]
 
 ## 3. Proposed Approaches
 
@@ -206,7 +206,7 @@ G8 fails if such an issue exists that this section does not link.
 
 | Issue | Type | Activity | Parent | Owner | Sprint |
 |---|---|---|---|---|---|
-| 〈#9〉 | 〈task〉 | 〈Window and Renderer〉 | [story:#32][https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/32] | 〈Isaiah〉 | 〈Sprint 2〉 |
+| 〈#9〉 | 〈task〉 | 〈Window and Renderer〉 | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/32] | 〈Isaiah〉 | 〈Sprint 2〉 |
 
 
 〈Replace these rows with your own, and keep the table current as you file new
