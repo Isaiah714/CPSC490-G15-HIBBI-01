@@ -1,6 +1,6 @@
 # Design — Game Engine and Game Demo System Architecture
 
-> Epic: #1 · Stories: #4
+> Epic: #25, #24 · Stories: #
 
 > Owner: 〈name〉 · Sprint: 2 · Status: draft
 
