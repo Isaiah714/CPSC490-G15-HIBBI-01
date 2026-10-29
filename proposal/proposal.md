@@ -70,35 +70,37 @@ ECS frameworks can be a more direct comparison to our project. Libraries like Fl
 
 ## 3. Proposed Approaches
 
-> Describe your proposed approach to solve the problem, specifying how you
-> will achieve the stated goals. List some possible strategies.
+We decided to take the ECS based engine because it ECS adopts a strategy
+called Data-Oriented Design (DOD). The alternative we considered is Object
+Oriente Programming since it's pretty common in game development. The reason
+why we wanted to adopt DOD style engine is this philosophy of design will 
+significantly improve the engines performace. Why? Well DOD groups related data
+sequentially for the CPU to access the data uninterruptly without committing
+cache misses. Cache misses is what causes the performance to drop and OOP
+is guilty of that.
 
-〈Your approach — **clear and concise**. State the strategy you chose, the
-alternatives you considered, and the reasoning that decided between them.
-Think of this as the argument, not the manual: a reader should finish this
-section understanding *what* you will do and *why that* rather than the
-alternatives.〉
+We settled on using OpenGL 3.3 as the oldest version. This version of OpenGL 
+covers older devices from 2010. This is the oldest we will do since it can 
+adopt some of the modern features of OpenGL. We initially thought of using 
+OpenGL 2.1, but implementing the rendering pipline would very tedious and 
+wouldn't really improve the performance very much. OpenGL 2.1 would have you
+call specific functions to do certain operations whereas in OpenGL 3.3 you can
+write a custom shader program that can do multiple operations in one spot.
 
-**Keep the details out of this section.** Tooling, platforms, frameworks,
-DBMS choices, environment setup, diagrams, and the work breakdown all belong
-in §4 (Required Environment, Resources, and Planned Activities). If a
-sentence here names a version number, a library, or a configuration, it
-probably belongs in §4 — leave a pointer instead ("the implementation stack
-is detailed in §4").
-
-〈A few paragraphs, or a short list of candidate strategies with one line of
-trade-off each. If it runs past a page, you are writing §4.〉
+We decided that our engine will tailor to our game demo. We want to program a
+game demo using the engine to evaluate the performance and verify benchmarks.
+Writing our engine this way will have us naturally avoid unnecessary sub features
+and maintain the core goal of making an efficient game engine. We considered
+designing a general-based engine like Unity or Unreal, but those engine have a
+lot of bloat and does not meet our core goal.
 
 ## 4. Required Environment, Resources, and Planned Activities
 
-> Review the required and available resources and environment to complete
-> your project. For example, server, platform, software tools, operating
-> systems, DBMS, or any required skills.
->
-> Describe the expected activities to achieve the stated goals, e.g.,
-> software development process.
-
-〈Your environment, resources, and planned activities.〉
+Operating Systems: Windows 11, Ubuntu Linux 26.04, Arch Linux
+Framework: OpenGL 3.3
+Language: C++26
+Build Tool: CMake 4.0.0
+Libraries: GLM (OpenGL Mathematics), Glad, SDL3 (Simple DirecMedia Layer), Assimp (Open Asset Import Library), stb_image
 
 **Diagrams belong in this section.** Include at minimum a high-level
 architecture diagram and a system (context) diagram; add the ER/EER model and
