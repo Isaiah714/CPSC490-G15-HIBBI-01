@@ -1,21 +1,49 @@
 # Prototype
 
-Proof-of-concept code for 〈project title〉. **Prototype v0 is due Sep 27** with
-the proposal, and it grows every sprint; the Week-8 in-class check demos from
-this folder.
+Proof-of-concept code for 〈Constrained Hardware/ECS architecture Game Engine〉.
 
-This example implements the login slice behind story
-[#3](../../../issues/3) and task [#5](../../../issues/5) — deliberately tiny,
-because a prototype exists to answer one risky question, not to be the
-product. **Replace it with yours** and keep the shape: a small module, a test
-per acceptance criterion, and run instructions below that work on a machine
-that has never seen your project.
+## Installing Dependencies
+```bash
+# IF on Linux
+cd prototype
+chmod +x setup.sh
+./setup.sh
+
+#IF on Windows
+cd prototype
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+.\setup.ps1
+```
+
+## How to build
+
+```bash
+# IF on Linux
+cd prototype
+cmake -B build -G 'Unix Makefiles'
+cd build
+make
+
+# IF on Windows
+cd prototype
+cmake -B build -G Ninja
+cd build
+Ninja
+
+# To use the Debugger, write this command when building the project
+cmake -B build -G <Write Generator Here> -D CMAKE_BUILD_TYPE=Debug
+```
 
 ## How to run
 
 ```bash
-cd prototype
-python login.py                 # smoke run: prints a truncated session token
+cd prototype/build
+
+# IF on Linux
+./run
+
+# IF on windows
+./run.exe           
 ```
 
 ## How to test
