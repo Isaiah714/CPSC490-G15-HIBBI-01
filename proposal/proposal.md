@@ -96,11 +96,20 @@ lot of bloat and does not meet our core goal.
 
 ## 4. Required Environment, Resources, and Planned Activities
 
-Operating Systems: Windows 11, Ubuntu Linux 26.04, Arch Linux
-Framework: OpenGL 3.3
-Language: C++26
-Build Tool: CMake 4.0.0
-Libraries: GLM (OpenGL Mathematics), Glad, SDL3 (Simple DirecMedia Layer), Assimp (Open Asset Import Library), stb_image
+Framework: OpenGL 3.3 - The oldest version that supports modern features where we can implement the rendering pipline less tedious
+
+Language: C++26 - Have all latest features available and use them when helpful
+
+Build Tool: CMake - versions 3.3-4.0, is going to be used to build the project
+
+Libraries...                      
+GLM (OpenGL Mathematics) - to have to ability to call mathematic operations without having manually do calculations        
+Glad - provides pointers to the OpenGL framwork        
+SDL3 (Simple DirecMedia Layer) - Handle player input, window events, and audio      
+Assimp (Open Asset Import Library) - To be able to load in assets    
+stb_image - Provides a more practical way to render textures onto meshes
+
+
 
 **Diagrams belong in this section.** Include at minimum a high-level
 architecture diagram and a system (context) diagram; add the ER/EER model and
