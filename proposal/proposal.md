@@ -7,75 +7,12 @@
 Authors: Padilla, Isaiah (Isaiah714), Qiu, Homan (NomMilk), Ayala, Brian (BrianTheDevGuy), Cole, Brandon (dev-b-cole), Morrell, Isaac (1mphuls3)
 Date: 2026-09-22
 
-> **This file is the proposal document, not a README.** Its section numbers,
-> titles, and guidance are copied from the course Word template, so it
-> converts cleanly for Canvas submission. Write continuous academic prose —
-> no task lists, no emoji, no repo jargon.
->
-> Each section below opens with the template's own guidance in a quote block.
-> **Delete the quote blocks and every 〈bracket〉 before submitting.**
->
-> **Getting this into the Word template for Canvas.** The template numbers
-> its headings **automatically** (a multilevel list: top-level sections at
-> level 1, *Related Work* and *Problem Statements* at level 2). The numbers
-> typed below exist so the repo copy is readable and checkable — so when you
-> move the text into Word, do not end up with both sets.
->
-> The reliable route, and the one most teams should use: **open the course
-> template and paste your prose section by section**, leaving Word's own
-> numbering to do the numbering. Ten minutes, no surprises.
->
-> If you prefer to convert, `pandoc` can do it (install with
-> `winget install pandoc`):
->
->     pandoc proposal/proposal.md -o proposal.docx --reference-doc="CPSC 490 Project Proposal Template Fall 2026.docx"
->
-> Then in Word: delete the typed `0.` / `1.` / `1.1` prefixes (Word re-adds
-> them from the list), and set *Related Work* and *Problem Statements* to the
-> template's level-2 heading so they number as 1.1 and 1.2. Check figure
-> placement, then submit.
->
-> **Formatting requirements — the submitted Word document is graded against
-> these, explicitly:**
->
-> - **Cover page: use the template's cover page, unchanged in layout.** Fill
->   in only its fields — project title, group number and name, sponsor,
->   authors, date — and keep the template's own placement, fonts and spacing
->   for it. The header block at the top of this file carries the same fields
->   so the paste is a transcription, not a redesign.
-> - **Font: Times New Roman, 11-point.** Body text, headings and captions
->   take their size and style from the template's own styles — do not
->   restyle anything by hand.
-> - **Line spacing: 1.5.** **Margins: 1.0 inch** on all four sides.
-> - **Section format, numbering and indentation must match the Word template
->   exactly** — the multilevel-list numbering, heading levels, and paragraph
->   indentation are the template's, not yours. If your document's §1.1 looks
->   different from the template's §1.1, fix yours.
-> - **Length: the Final Project Proposal Paper (due Sun Dec 20) must exceed
->   50 pages** under exactly this formatting — font, spacing and margins are
->   fixed above precisely so page count means the same thing for every team.
->   The Preview paper (due Sun Nov 29) is the same document part-way; it has
->   no minimum, but it is graded on the same formatting.
->
-> A paste into the template inherits all of this automatically **if you paste
-> as text and let Word's styles apply** (Home → Paste → *Keep Text Only*, or
-> apply the template's styles after pasting). A pandoc conversion with
-> `--reference-doc` inherits it too — but verify font, spacing and margins
-> afterward rather than assuming.
->
-> Either way, keep this Markdown copy current — it is what peer review and CI
-> can actually read. If your team writes in Word instead, commit the `.docx`
-> here as well.
-
----
-
 ## 0. Abstract
 
-	Game engines play an important role in modern game development by providing the systems responsible for rendering, resource management, memory handling, and the execution of game logic. However, many existing engines are designed to support a broad range of applications and platforms, which can result in significant resource requirements. This can create difficulties for developers specificly working with resource-constrained hardware. At the same time, the way a game engine organizes and processes its data can have a substantial effect on performance, particularly when a game must manage large numbers of entities simultaneously.
+Game engines play an important role in modern game development by providing the systems responsible for rendering, resource management, memory handling, and the execution of game logic. However, many existing engines are designed to support a broad range of applications and platforms, which can result in significant resource requirements. This can create difficulties for developers specificly working with resource-constrained hardware. At the same time, the way a game engine organizes and processes its data can have a substantial effect on performance, particularly when a game must manage large numbers of entities simultaneously.
 
-	The proposed project is a low-level game engine built around older hardware with an Entity Component System (ECS) architecture. The engine will provide direct control over fundamental rendering and game systems while avoiding dependencies on graphics features introduced in later versions of OpenGL. The ECS will organize game data into entities, components, and systems rather than relying primarily on traditional object-oriented game objects. This approach is significant because it introduces data-oriented design and improved memory locality while operating within the limitations of an older graphics API. Implementing these systems together is non-trivial because the engine must balance compatibility, performance, memory management, and modularity without relying on modern graphics functionality.
-
-	The primary goals of the project are to develop a functional rendering system, implement an ECS capable of efficiently processing game entities, and create a way for user of the applications to create their own games. The expected outcome is a lightweight engine uses modern architectural techniques to improve performance while maintaining support for legacy hardware. The project will also evaluate the performance and limitations of the ECS architecture approach through testing and example applications.
+The proposed project is a low-level game engine built around older hardware with an Entity Component System (ECS) architecture. The engine will provide direct control over fundamental rendering and game systems while avoiding dependencies on graphics features introduced in later versions of OpenGL. The ECS will organize game data into entities, components, and systems rather than relying primarily on traditional object-oriented game objects. This approach is significant because it introduces data-oriented designand improved memory locality while operating within the limitations of an older graphics API. Implementing these systems together is non-trivial because the engine must balance compatibility, performance, memory management, and modularity without relying on modern graphics functionality.
+The primary goals of the project are to develop a functional rendering system, implement an ECS capable of efficiently processing game entities, and create a way for user of the applications to create their own games. The expected outcome is a lightweight engine uses modern architectural techniques to improve performance while maintaining support for legacy hardware. The project will also evaluate the performance and limitations of the ECS architecture approach through testing and example applications.
 The remainder of this document describes the background and motivation for the project, the proposed engine architecture and technologies.
 
 ## 1. Introduction
@@ -115,53 +52,55 @@ ECS frameworks can be a more direct comparison to our project. Libraries like Fl
 
 | Problem | Addressed by |
 |---|---|
-| P1 Giving the developers an idea of the core features in the proposed game development framework can be challenging, particularly when showcasing its rendering capabilities, interactive gameplay, and world creation features. A functional demo is needed to validate the framework's usability, demonstrate its performance, and illustrate what developers can achieve in our proposed engine. | Game Demo (#n) |
-| P2 Developers looking for lightweight adaptable game development frameworks face trade-offs with lower level tools that may require substantial custom implementation and comprehensive game engines that provide more functionality than necessary for a project. This creates a need for a framework that supports efficient game development, cross platform compatibility, flexible rendering, and accessible world creation | Game Engine (#n) |
+| P1 Giving the developers an idea of the core features in the proposed game development framework can be challenging, particularly when showcasing its rendering capabilities, interactive gameplay, and world creation features. A functional demo is needed to validate the framework's usability, demonstrate its performance, and illustrate what developers can achieve in our proposed engine. | Game Demo ([#25](https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25)) |
+| P2 Developers looking for lightweight adaptable game development frameworks face trade-offs with lower level tools that may require substantial custom implementation and comprehensive game engines that provide more functionality than necessary for a project. This creates a need for a framework that supports efficient game development, cross platform compatibility, flexible rendering, and accessible world creation | Game Engine ([#24](https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24)) |
 
 ## 2. Goals and Objectives
 
-- **Goal 1: 〈Game Demo〉** [epic:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]
-  - Objective 1.1: Implement engaging enemies for players to interact with [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/26]
-  - Objective 1.2: Create a gameplay loop for a fun and interactive user experience [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/27]
-  - Objective 1.3: Implement player inputs and level interaction [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/28]
-  - Objective 1.4: Design and implement immersive world building [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/29]
-- **Goal 2: 〈Game Engine〉** [epic:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]
+- **Goal 1: Game Demo** [epic:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]
+  - Objective 1.1: Implement at least 3 enemies for players to interact with [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/26]
+  - Objective 1.2: Create a fun gameplay loop by elimating enemies and/or collecting items [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/27]
+  - Objective 1.3: Implement player movement and action inputs and level interaction [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/28]
+  - Objective 1.4: Design world map and implement building system for players to build walls and other useful buildings [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/29]
+- **Goal 2: Game Engine** [epic:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]
   - Objective 2.1: Implement ECS architecture for the engine. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/30]
-  - Objective 2.2: Demonstrate multiplatform compilation. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/31]
+  - Objective 2.2: Demonstrate multiplatform compilation for at least Mac, Windows, and Linux. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/31]
   - Objective 2.3: Create an adaptable real time render system. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/32]
   - Objective 2.4: Implement visual editor to import models, create objects, and design the game world. [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/33]
 
 ## 3. Proposed Approaches
 
-> Describe your proposed approach to solve the problem, specifying how you
-> will achieve the stated goals. List some possible strategies.
+We decided to take the ECS based engine because it ECS adopts a strategy
+called Data-Oriented Design (DOD). The alternative we considered is Object
+Oriente Programming since it's pretty common in game development. The reason
+why we wanted to adopt DOD style engine is this philosophy of design will 
+significantly improve the engines performace. Why? Well DOD groups related data
+sequentially for the CPU to access the data uninterruptly without committing
+cache misses. Cache misses is what causes the performance to drop and OOP
+is guilty of that.
 
-〈Your approach — **clear and concise**. State the strategy you chose, the
-alternatives you considered, and the reasoning that decided between them.
-Think of this as the argument, not the manual: a reader should finish this
-section understanding *what* you will do and *why that* rather than the
-alternatives.〉
+We settled on using OpenGL 3.3 as the oldest version. This version of OpenGL 
+covers older devices from 2010. This is the oldest we will do since it can 
+adopt some of the modern features of OpenGL. We initially thought of using 
+OpenGL 2.1, but implementing the rendering pipline would very tedious and 
+wouldn't really improve the performance very much. OpenGL 2.1 would have you
+call specific functions to do certain operations whereas in OpenGL 3.3 you can
+write a custom shader program that can do multiple operations in one spot.
 
-**Keep the details out of this section.** Tooling, platforms, frameworks,
-DBMS choices, environment setup, diagrams, and the work breakdown all belong
-in §4 (Required Environment, Resources, and Planned Activities). If a
-sentence here names a version number, a library, or a configuration, it
-probably belongs in §4 — leave a pointer instead ("the implementation stack
-is detailed in §4").
-
-〈A few paragraphs, or a short list of candidate strategies with one line of
-trade-off each. If it runs past a page, you are writing §4.〉
+We decided that our engine will tailor to our game demo. We want to program a
+game demo using the engine to evaluate the performance and verify benchmarks.
+Writing our engine this way will have us naturally avoid unnecessary sub features
+and maintain the core goal of making an efficient game engine. We considered
+designing a general-based engine like Unity or Unreal, but those engine have a
+lot of bloat and does not meet our core goal.
 
 ## 4. Required Environment, Resources, and Planned Activities
 
-> Review the required and available resources and environment to complete
-> your project. For example, server, platform, software tools, operating
-> systems, DBMS, or any required skills.
->
-> Describe the expected activities to achieve the stated goals, e.g.,
-> software development process.
-
-〈Your environment, resources, and planned activities.〉
+Operating Systems: Windows 11, Ubuntu Linux 26.04, Arch Linux
+Framework: OpenGL 3.3
+Language: C++26
+Build Tool: CMake 4.0.0
+Libraries: GLM (OpenGL Mathematics), Glad, SDL3 (Simple DirecMedia Layer), Assimp (Open Asset Import Library), stb_image
 
 **Diagrams belong in this section.** Include at minimum a high-level
 architecture diagram and a system (context) diagram; add the ER/EER model and
