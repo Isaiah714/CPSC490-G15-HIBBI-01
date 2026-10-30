@@ -116,6 +116,10 @@ figure the text never mentions is decoration. See `docs/design/DIAGRAMS.md`
 for tools, conventions, and the rule that every box and arrow must be
 verified against reality.〉
 
+![Architecture Diagram](../docs/design/diagrams/architecture.png)
+
+*Figure 1 - High Level architecture of proposed game engine framework. The diagram illustrates two primary project components, the game engine and game demo, as well as the scene editor component. As well as their internal subsystems and relationships between the editor, engine runtime, and game demo*
+
 ### Specification and design documents
 
 **Every specification and design document the team writes is listed here**
