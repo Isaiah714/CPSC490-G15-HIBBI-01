@@ -16,7 +16,7 @@ The Game Demo serves as an example application built using the framework. It dem
 
 ## 2. High-Level Architecture Diagram
 
-<img src="./diagrams/architecture.png" alt="Architecture Diagram" width="600" />
+![Architecture Diagram](./diagrams/architecture.png)
 
 *Figure 1 - High Level architecture of proposed game engine framework. The diagram illustrates two primary project components, the game engine and game demo, as well as the scene editor component. As well as their internal subsystems and relationships between the editor, engine runtime, and game demo*
 
