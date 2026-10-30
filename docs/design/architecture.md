@@ -1,6 +1,6 @@
 # Design — Game Engine and Game Demo System Architecture
 
-> Epic: #25, #24 \
+> Epic: [#25](https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25), [#24](https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24) \
 > Owner: Isaac Morrell · Sprint: 2 · Status: Draft \
 > Source: [Lucidchart](https://lucid.app/lucidchart/70a10098-cd63-4b82-9980-bee08905d852/edit?viewport_loc=1492%2C35%2C2782%2C1820%2C0_0&invitationId=inv_8b9ad919-556b-4312-82a1-66fc80152ced')
 
