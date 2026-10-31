@@ -1,7 +1,7 @@
 # Specification — Game Engine
 
 > Epic: #24 · Stories: #30, #31, #32, #33
-> Owner: 〈Brandon Cole〉 · Sprint: 2 · Status: draft
+> Owner: Brandon Cole · Sprint: 2 · Status: draft
 
 ## Scope
 
@@ -55,7 +55,7 @@ These features may be considered for future development but are not required for
 
 | Question | Owner | Needed by |
 |---|---|---|
-| What is the minimum OpenGL version the engine will support? | 〈Brandon Cole〉 | Before rendering implementation |
-| What hardware specifications will define the low-end hardware target? | 〈Brandon Cole〉 | Before performance testing |
-| Which ECS component storage strategy will be used (e.g., sparse sets or archetypes)? | 〈Brandon Cole〉 | Before ECS implementation |
-| Will the visual editor be a standalone application or integrated into the game engine? | 〈Brandon Cole〉 | Before editor implementation |
+| What is the minimum OpenGL version the engine will support? | Brandon Cole | Before rendering implementation |
+| What hardware specifications will define the low-end hardware target? | Brandon Cole | Before performance testing |
+| Which ECS component storage strategy will be used (e.g., sparse sets or archetypes)? | Brandon Cole | Before ECS implementation |
+| Will the visual editor be a standalone application or integrated into the game engine? | Brandon Cole | Before editor implementation |

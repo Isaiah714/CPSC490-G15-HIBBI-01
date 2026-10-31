@@ -1,7 +1,7 @@
 # Specification — Game Demo
 
 > Epic: #25 · Stories: #26, #27, #28, #29
-> Owner: 〈Brandon Cole〉 · Sprint: 2 · Status: draft
+> Owner: Brandon Cole · Sprint: 2 · Status: draft
 
 ## Scope
 
@@ -60,6 +60,6 @@ These features are not necessary to demonstrate the engine's functionality or ev
 
 | Question | Owner | Needed by |
 |---|---|---|
-| What specific behaviors will distinguish the three enemy types? | 〈Brandon Cole〉 | Before enemy implementation |
-| What gameplay actions will the player be able to perform? | 〈Brandon Cole〉 | Before player implementation |
-| What entity counts will be used during the game's performance testing? | 〈Brandon Cole〉 | Before benchmark implementation |
+| What specific behaviors will distinguish the three enemy types? | Brandon Cole | Before enemy implementation |
+| What gameplay actions will the player be able to perform? | Brandon Cole | Before player implementation |
+| What entity counts will be used during the game's performance testing? | Brandon Cole | Before benchmark implementation |
