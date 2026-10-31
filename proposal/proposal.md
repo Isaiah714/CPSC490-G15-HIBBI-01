@@ -130,8 +130,8 @@ buildable. CI gate G9 fails if a document exists in `docs/specs/` or
 
 | Document | Kind | Covers | Issues |
 |---|---|---|---|
-| 〈docs/specs/account-management.md〉 | specification | 〈account management requirements〉 | 〈#n, #n〉 |
-| 〈docs/design/architecture.md〉 | design | 〈system architecture + data model〉 | 〈#n〉 |
+| 〈docs/specs/game-engine.md〉 | specification | game engine requirements〉 | 〈#49〉 |
+| 〈docs/specs/game-demo.md〉 | specification | game demo requirements〉 | 〈#49〉 |
 
 〈The scaffold ships `docs/specs/example-spec.md` and
 `docs/design/example-design.md` as worked examples — read them, then delete
