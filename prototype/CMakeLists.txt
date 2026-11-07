@@ -17,15 +17,18 @@ find_package(assimp REQUIRED)
 
 find_package(glm REQUIRED)
 
+file(GLOB_RECURSE ENGINE_SOURCES
+    src/*.cpp
+    src/*.c
+)
+
 add_executable(run
-    src/main.cpp
-    src/glad.c
-    lib/include/stb_image/stb_image.cpp
+    ${ENGINE_SOURCES}
 )
 
 target_include_directories(run PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/lib/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
 target_link_libraries(run PRIVATE
@@ -36,15 +39,12 @@ target_link_libraries(run PRIVATE
 
 if(WIN32)
     target_link_libraries(run PRIVATE opengl32)
-
-    # Optional: Copy DLLs or handle Windows subsystems if needed (e.g., hide console in Release)
-    # set_target_properties(run PROPERTIES WIN32_EXECUTABLE TRUE)
-
-elseif(UNIX AND NOT APPLE)
+elseif(APPLE)
+    find_package(OpenGL REQUIRED)
+    target_link_libraries(run PRIVATE OpenGL::GL)
+elseif(UNIX)
     find_package(OpenGL REQUIRED)
     find_package(Threads REQUIRED)
     target_link_libraries(run PRIVATE OpenGL::GL)
-    
     target_link_libraries(run PRIVATE Threads::Threads dl)
 endif()
-
