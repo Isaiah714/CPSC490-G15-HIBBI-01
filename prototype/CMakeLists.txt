@@ -24,6 +24,14 @@ file(GLOB_RECURSE ENGINE_SOURCES
 
 add_executable(run
     ${ENGINE_SOURCES}
+
+    lib/imgui/imgui.cpp
+    lib/imgui/imgui_draw.cpp
+    lib/imgui/imgui_tables.cpp
+    lib/imgui/imgui_widgets.cpp
+
+    lib/imgui/imgui_impl_sdl3.cpp
+    lib/imgui/imgui_impl_opengl3.cpp
 )
 
 target_include_directories(run PRIVATE

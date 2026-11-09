@@ -8,6 +8,10 @@
 
 #include <SDL3/SDL.h>
 
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_sdl3.h>
+#include <imgui/imgui_impl_opengl3.h>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -163,6 +167,15 @@ int main() {
 
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << "\n";
     std::cout << "Renderer: " << glGetString(GL_RENDERER) << "\n";
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+    ImGuiStyle& style = ImGui::GetStyle();
+    ImGui::StyleColorsDark();
 
     glViewport(0, 0, WIDTH, HEIGHT);
 
