@@ -177,6 +177,9 @@ int main() {
     ImGuiStyle& style = ImGui::GetStyle();
     ImGui::StyleColorsDark();
 
+    ImGui_ImplSDL3_InitForOpenGL(window, glContext);
+    ImGui_ImplOpenGL3_Init();
+
     glViewport(0, 0, WIDTH, HEIGHT);
 
     // Depth Culling
@@ -237,6 +240,7 @@ int main() {
 
     while (isRunning) {
         while (SDL_PollEvent(&event)) {
+            ImGui_ImplSDL3_ProcessEvent(&event);
             if (event.type == SDL_EVENT_QUIT) {
                 isRunning = false;
             }
@@ -271,8 +275,20 @@ int main() {
         
         glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(indices[0]), GL_UNSIGNED_INT, 0);
 
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplSDL3_NewFrame();
+        ImGui::NewFrame();
+        ImGui::Begin("Info");
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+        ImGui::End();
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         SDL_GL_SwapWindow(window);
     }
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplSDL3_Shutdown();
+    ImGui::DestroyContext();
 
     SDL_GL_DestroyContext(glContext);
     SDL_DestroyWindow(window);
