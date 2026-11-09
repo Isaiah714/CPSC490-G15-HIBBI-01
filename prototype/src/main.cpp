@@ -1,5 +1,5 @@
 #include "glad/glad.h"
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
 #include <assimp/aabb.h>
 
 #include <glm/glm.hpp>
@@ -119,6 +119,7 @@ unsigned int createShader(std::string path, unsigned int type) {
 }
 
 int main() {
+
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         std::cerr << "Error: Failed to initialize SDL3: " << SDL_GetError() << "\n";
         return -1;
@@ -170,8 +171,8 @@ int main() {
     glEnable(GL_DEPTH_TEST);
 
     // Initialize and Compile Shaders
-    unsigned int vertexShader = createShader("../assets/shaders/vertex_shader.glsl", GL_VERTEX_SHADER);
-    unsigned int fragmentShader = createShader("../assets/shaders/fragment_shader.glsl", GL_FRAGMENT_SHADER);
+    unsigned int vertexShader = createShader("assets/shaders/vertex_shader.glsl", GL_VERTEX_SHADER);
+    unsigned int fragmentShader = createShader("assets/shaders/fragment_shader.glsl", GL_FRAGMENT_SHADER);
 
     // Attach the shaders to the program
     unsigned int shaderProgram = glCreateProgram();
