@@ -159,7 +159,39 @@ G8 fails if such an issue exists that this section does not link.
 | Issue | Type | Activity | Parent | Owner | Sprint |
 |---|---|---|---|---|---|
 | 〈#9〉 | 〈task〉 | 〈Window and Renderer〉 | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/32] | 〈Isaiah〉 | 〈Sprint 2〉 |
-
+| <#10>  | <task/documentation>  | <Draft Introduction Background>  | []  | <Brandon>  | <Sprint 1>  |
+| <#11>  | <task/documentation>  | <Draft Problem & Difference>  | []  | <Brian>  | <Sprint 1>  |
+| <#12>  | <task>  | <Fill the cover fields>  | []  | <Brain>  | <Sprint 1>  |
+| <#16>  | <task>  | <Absract Documentation>  | []  | <Homan>  | <Sprint 1>  |
+| <#24>  | epic>  | <Game Engine>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | <Isaiah>  | <Sprint 3>  |
+| <#25>  | <user-story>  | <Game Demo>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25] | <Isaiah>  | <Sprint 3>  |
+| <#26>  | <user-story>  | <Implement enemies>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | <Isaiah>  | <Sprint 3>  |
+| <#27>  | <user-story>  | <Create gameplay loop>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | <Isaiah>  | <Sprint 3>  |
+| <#28>  | <user-story>  | <Implement player inputs and interaction>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | <Isaiah>  | <Sprint 3>  |
+| <#29>  | <user-story>  | <Implement world building>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | <Isaiah>  | <Sprint 3>  |
+| <#30>  | <user-story>  | <Implement ECS architecture>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | <Isaiah>  | <Sprint 3>  |
+| <#31>  | <user-story>  | <Demonstrate muliplatform compilation>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | <Isaiah>  | <Sprint 3>  |
+| <#32>  | <user-story>  | <Create real time render system>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | <Isaiah>  | <Sprint 3>  |
+| <#33>  | <user-story>  | <Implement visual editor>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | <Isaiah>  | <Sprint 3>  |
+| <#34>  | <task/documentation>  | <Write Related Work>  | []  | <Isaac>  | <Sprint 1>  |
+| <#35>  | <task/documentation>  | <Write Goals and Objectives>  | []  | <Isaiah>  | <Sprint 1>  |
+| <#36>  | <task/documentation>  | <Write Problem Statements>  | []  | <Brian>  | <Sprint 1>  |
+| <#40>  | <task/documentation>  | <Revise Section 0 and 1>  | []  | <Isaac>  | <Sprint 1>  |
+| <#44>  | <documentation>  | <Fixing section 2 and 4>  | []  | <Isaiah>  | <Sprint 2>  |
+| <#46>  | <task>  | <Setting Up CMake environment>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/46]  | <Homan>  | <Sprint 2>  |
+| <#47>  | <documentation>  | <System Context Diagram>  | []  | <Isaac>  | <Sprint 2>  |
+| <#48>  | <documentation>  | <Architecture Diagram>  | []  | <Brandon>  | <Sprint 2>  |
+| <#49>  | <documentation>  | <Specification Requiremnts>  | []  | <Isaiah>  | <Sprint 2>  |
+| <#50>  | <documentation>  | <Revise Sprint 1>  | []  | <Isaac>  | <Sprint 2>  |
+| <#54>  | <documentation>  | <Fixing spacing Proposal.md>  | []  | <Isaiah>  | <Sprint 3>  |
+| <#57>  | <task>  | <Updating environment>  | []  | <Homan>  | <Sprint 3>  |
+| <#58>  | <task>  | <Add choices in environment list>  | []  | <Isaiah>  | <Sprint 3>  |
+| <#61>  | <documentation>  | <Updating Proposal with issues>  | []  | <Isaiah>  | <Sprint 3>  |
+| <#63>  | <task>  | <Implement Basic ECS system>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/30]  | <Homan>  | <Sprint 3>  |
+| <#64>  | <>  | <Environment Folder Organization>  | []  | <Brandon>  | <Sprint 3>  |
+| <#66>  | <task>  | <Link SDL3 and Assimp into machine code>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/31]  | <Homan>  | <Sprint 3>  |
+| <#67>  | <task>  | <Import ImGui and basic UI>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/33]  | <Isaac>  | <Sprint 3>  |
+| <#70>  | <bug/enhancemnt>  | <Add files for implementation>  | []  | <Homan>  | <Sprint 3>  |
 
 〈Replace these rows with your own, and keep the table current as you file new
 issues — with §2 it gives a reader every planned activity in one place, each
