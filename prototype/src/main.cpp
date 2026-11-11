@@ -302,6 +302,14 @@ int main() {
         ImGui_ImplSDL3_NewFrame();
         ImGui::NewFrame();
         ImGui::BeginMainMenuBar();
+        if (ImGui::BeginMenu("Insert")) {
+            if (ImGui::MenuItem("Cube")) {
+                //shapeManager.addShape(new Cube(0.0f, 0.0f, 0.0f, 1.0f, 2, shapeManager.incrementShapeCounter()));
+                //shapeManager.setSelectedShapeByLastAdded();
+            }
+            ImGui::EndMenu();
+        }
+	ImGui::Separator();
         ImGui::Text("%.1f FPS", io.Framerate);
         ImGui::EndMainMenuBar();
         ImGui::Render();
