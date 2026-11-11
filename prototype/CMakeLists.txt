@@ -10,18 +10,44 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
+find_package(SDL3 QUIET)
+if(NOT SDL3_FOUND)
+    include(FetchContent)
+    set(SDL_SHARED OFF CACHE BOOL "Build SDL shared library" FORCE)
+    set(SDL_STATIC ON CACHE BOOL "Build SDL static library" FORCE)
 
-find_package(SDL3 REQUIRED)
+    FetchContent_Declare(
+        SDL3
+        GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+        GIT_TAG release-3.2.0
+    )
+    FetchContent_MakeAvailable(SDL3)
+endif()
 
-find_package(assimp REQUIRED)
+find_package(assimp QUIET)
+if(NOT assimp_FOUND)
+    include(FetchContent)
+    set(ASSIMP_WARNINGS_AS_ERRORS OFF CACHE BOOL "" FORCE)
+    set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+    set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE BOOL "" FORCE)
+    set(ASSIMP_INSTALL OFF CACHE BOOL "" FORCE)
+    set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build static libraries" FORCE)
 
-find_package(glm REQUIRED)
+    FetchContent_Declare(
+        assimp
+        GIT_REPOSITORY https://github.com/assimp/assimp.git
+        GIT_TAG v5.4.3
+    )
+    FetchContent_MakeAvailable(assimp)
+endif()
 
 file(GLOB_RECURSE ENGINE_SOURCES
     lib/imgui/*.cpp
     src/*.cpp
     src/*.c
 )
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(run
     ${ENGINE_SOURCES}
@@ -35,7 +61,6 @@ target_include_directories(run PRIVATE
 target_link_libraries(run PRIVATE
     SDL3::SDL3
     assimp::assimp
-    glm::glm
 )
 
 if(WIN32)
