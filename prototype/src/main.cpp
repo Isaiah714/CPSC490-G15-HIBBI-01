@@ -15,6 +15,8 @@
 #include "engine/ecs_core/entity_manager.hpp"
 #include "engine/components/transform.hpp"
 
+#include "engine/renderer/modelLoader.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -241,6 +243,7 @@ int main() {
 
     bool isRunning = true;
     SDL_Event event;
+
     // Initialize entity manager and create 2 cube entities
     EntityManager manager;
     Entity cube1 = manager.CreateEntity();
@@ -250,6 +253,8 @@ int main() {
     ComponentManager components;
     components.AddComponent<Transform>(cube1, 1.0, 0.0, 0.0, 0.0, 45.0, 0.0, 1.0, 1.0, 1.0);
     components.AddComponent<Transform>(cube2, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 1.0);
+
+    ModelLoader modelLoader;
 
     while (isRunning) {
         while (SDL_PollEvent(&event)) {
@@ -271,7 +276,6 @@ int main() {
 
         glm::mat4 view = glm::lookAt(cameraPos, camTarget, glm::vec3(0.0f, 1.0f, 0.0f));
         glm::mat4 projection = glm::perspective(glm::radians(fieldOfView), aspect, 0.1f, 100.0f);
-
         // Model matrix with cube rotated 45 degrees
         // Get all entities with transform components, and render them
         auto entities = components.GetEntitiesWith<Transform>();
@@ -304,8 +308,7 @@ int main() {
         ImGui::BeginMainMenuBar();
         if (ImGui::BeginMenu("Insert")) {
             if (ImGui::MenuItem("Cube")) {
-                //shapeManager.addShape(new Cube(0.0f, 0.0f, 0.0f, 1.0f, 2, shapeManager.incrementShapeCounter()));
-                //shapeManager.setSelectedShapeByLastAdded();
+                //modelLoader.drawModels();
             }
             ImGui::EndMenu();
         }
