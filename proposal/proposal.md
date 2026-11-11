@@ -121,7 +121,7 @@ stb_image - Provides a more practical way to render textures onto meshes
 \
 \
 \
-![System Context Diagram](<../docs/design/Diagrams/System Context Diagram.png>)
+![System Context Diagram](../docs/design/Diagrams/system-context-diagram.png)
 
 *Figure 2 - System context of the proposed game engine framework. The diagrame illustrates the primary users as well as their interaction with both the game engine and the game demo*
 
