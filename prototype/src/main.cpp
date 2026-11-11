@@ -11,6 +11,10 @@
 #include "backends/imgui_impl_sdl3.h"
 #include "backends/imgui_impl_opengl3.h"
 
+#include "engine/ecs_core/component_manager.hpp"
+#include "engine/ecs_core/entity_manager.hpp"
+#include "engine/components/transform.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -139,7 +143,7 @@ int main() {
         "Prototype",
         WIDTH,
         HEIGHT,
-        SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
+        SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE 
     );
 
     if (!window) {
@@ -237,6 +241,15 @@ int main() {
 
     bool isRunning = true;
     SDL_Event event;
+    // Initialize entity manager and create 2 cube entities
+    EntityManager manager;
+    Entity cube1 = manager.CreateEntity();
+    Entity cube2 = manager.CreateEntity();
+
+    // Create transform components and store at the cube entity id indices
+    ComponentManager components;
+    components.AddComponent<Transform>(cube1, 1.0, 0.0, 0.0, 0.0, 45.0, 0.0, 1.0, 1.0, 1.0);
+    components.AddComponent<Transform>(cube2, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 1.0);
 
     while (isRunning) {
         while (SDL_PollEvent(&event)) {
@@ -256,24 +269,34 @@ int main() {
 
         glUseProgram(shaderProgram);
 
-        // Model matrix with cube rotated 45 degrees
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        
         glm::mat4 view = glm::lookAt(cameraPos, camTarget, glm::vec3(0.0f, 1.0f, 0.0f));
         glm::mat4 projection = glm::perspective(glm::radians(fieldOfView), aspect, 0.1f, 100.0f);
 
-        // Push matrices to shader
-        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        
-        glUniform3fv(colorLoc, 1, glm::value_ptr(cubeColor));
-        glUniform3fv(lightPosLoc, 1, glm::value_ptr(lightPos));
-        
-        glBindVertexArray(VAO);
-        
-        glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(indices[0]), GL_UNSIGNED_INT, 0);
+        // Model matrix with cube rotated 45 degrees
+        // Get all entities with transform components, and render them
+        auto entities = components.GetEntitiesWith<Transform>();
+        for (Entity entity : entities) {
+            auto& transform = components.GetComponent<Transform>(entity);
+
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(transform.xPos, transform.yPos, transform.zPos));
+            model = glm::rotate(model, glm::radians(transform.xRot), glm::vec3(0.0f, 1.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(transform.yRot), glm::vec3(0.0f, 1.0f, 0.0f));
+            model = glm::rotate(model, glm::radians(transform.zRot), glm::vec3(0.0f, 1.0f, 0.0f));
+            model = glm::scale(model, glm::vec3(transform.xScale, transform.yScale, transform.zScale));
+
+            // Push matrices to shader
+            glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+            glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            
+            glUniform3fv(colorLoc, 1, glm::value_ptr(cubeColor));
+            glUniform3fv(lightPosLoc, 1, glm::value_ptr(lightPos));
+            
+            glBindVertexArray(VAO);
+            
+            glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(indices[0]), GL_UNSIGNED_INT, 0);
+        }
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplSDL3_NewFrame();
