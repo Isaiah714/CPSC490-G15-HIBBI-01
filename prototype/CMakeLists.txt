@@ -42,6 +42,7 @@ if(NOT assimp_FOUND)
 endif()
 
 file(GLOB_RECURSE ENGINE_SOURCES
+    lib/imgui/*.cpp
     src/*.cpp
     src/*.c
 )
