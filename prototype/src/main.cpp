@@ -1,5 +1,4 @@
 #include "glad/glad.h"
-//#include <GLFW/glfw3.h>
 #include <assimp/aabb.h>
 
 #include <glm/glm.hpp>
@@ -8,9 +7,9 @@
 
 #include <SDL3/SDL.h>
 
-#include <imgui/imgui.h>
-#include <imgui/imgui_impl_sdl3.h>
-#include <imgui/imgui_impl_opengl3.h>
+#include "imgui.h"
+#include "backends/imgui_impl_sdl3.h"
+#include "backends/imgui_impl_opengl3.h"
 
 #include <iostream>
 #include <fstream>
