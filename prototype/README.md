@@ -2,19 +2,6 @@
 
 Proof-of-concept code for 〈Constrained Hardware/ECS architecture Game Engine〉.
 
-## Installing Dependencies
-```bash
-# IF on Linux
-cd prototype
-chmod +x setup.sh
-./setup.sh
-
-#IF on Windows
-cd prototype
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-.\setup.ps1
-```
-
 ## How to build
 
 ```bash
@@ -50,23 +37,25 @@ cd prototype/build
 
 ```bash
 cd prototype
-pip install pytest              # once
-python -m pytest tests -q       # 4 tests
-```
 
-CI runs exactly these tests on every pull request (job **Prototype build &
-tests**). If you use Node instead of Python, put a `package.json` here with a
-`test` script and CI will detect and run that instead.
+# IF the project hasn't been built yet, otherwise skip this step
+cmake --build build --target test_engine_components
+
+cd build
+
+# IF on Linux
+./test_engine_components
+
+# IF on Windows
+./test_engine_components.exe
+```
 
 ## What it proves
 
-That credentials can be checked and a session token issued, with unknown-user
-and wrong-password failures indistinguishable to the caller — the riskiest
-assumption in 〈the epic this belongs to〉.
+That the basic implementation of ECS system works
 
 ## Status
 
 | Sprint | Increment |
 |---|---|
-| v0 (Sep 27) | login check + 4 tests (this example) |
-| Sprint 1 | 〈what you added〉 |
+| Sprint 3 | Tests that check the basic ECS system |

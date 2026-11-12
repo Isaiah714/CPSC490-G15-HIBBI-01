@@ -102,6 +102,56 @@ jobs:
             exit "$rc"
           fi
 
+      # --- C++ prototypes ------------------------------------------
+      - name: Detect CMake project
+        id: cmake
+        run: |
+          if [ -f CMakeLists.txt ]; then echo "found=true" >> "$GITHUB_OUTPUT";
+          else echo "found=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Install Linux graphics & windowing dependencies (CMake)
+        if: steps.cmake.outputs.found == 'true' && runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgl1-mesa-dev \
+            libglu1-mesa-dev \
+            libasound2-dev \
+            libwayland-dev \
+            libxcursor-dev \
+            libxi-dev \
+            libxinerama-dev \
+            libxkbcommon-dev \
+            libxrandr-dev
+
+      - name: Configure CMake
+        if: steps.cmake.outputs.found == 'true'
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build C++ project
+        if: steps.cmake.outputs.found == 'true'
+        run: cmake --build build --config Release -j$(nproc)
+
+      - name: Run Tests (CMake)
+        if: steps.cmake.outputs.found == 'true'
+        run: |
+          if [ -f build/test_engine_components ] || [ -f build/Debug/test_engine_components.exe ] || [ -f build/Release/test_engine_components.exe ]; then
+            # Run the specific test_engine_components executable we defined in CMakeLists.txt
+            if [ -f build/test_engine_components ]; then
+              ./build/test_engine_components
+            elif [ -f build/Release/test_engine_components.exe ]; then
+              ./build/Release/test_engine_components.exe
+            else
+              ./build/Debug/test_engine_components.exe
+            fi
+          elif [ -f build/tests ] || [ -f build/run_tests ]; then
+            ./build/tests || ./build/run_tests
+          elif ctest --test-dir build --show-only=json | grep -q "name"; then
+            ctest --test-dir build --output-on-failure
+          else
+            echo "::warning::CMake project compiled successfully, but no test suite was found. Add add_test() or a test executable."
+          fi
+
       - name: Nothing to build
         if: steps.node.outputs.found == 'false' && steps.py.outputs.found == 'false'
         run: echo "::notice::prototype/ has no Node or Python project yet (expected before Sep 27)."
