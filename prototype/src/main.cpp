@@ -16,7 +16,7 @@
 #include "engine/components/transform.hpp"
 #include "engine/components/mesh.hpp"
 
-#include "engine/renderer/modelLoader.hpp"
+#include "engine/renderer/model_loader.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -258,7 +258,7 @@ int main() {
     components.AddComponent<Mesh>(cube1, vertices, indices, sizeof(vertices) / sizeof(vertices[0]), sizeof(indices) / sizeof(indices[0]));
     components.AddComponent<Mesh>(cube2, vertices, indices, sizeof(vertices) / sizeof(vertices[0]), sizeof(indices) / sizeof(indices[0]));
 
-    ModelLoader modelLoader;
+    ModelLoader modelLoader(shaderProgram);
 
     while (isRunning) {
         while (SDL_PollEvent(&event)) {

@@ -10,9 +10,10 @@
 
 class ModelLoader {
     public:
-        ModelLoader();
+        ModelLoader(unsigned int shader);
         ~ModelLoader();
-        void DrawModels(Transform& transform, Mesh& mesh);
+        void DrawMesh(Transform& transform, Mesh& mesh);
     private:
+	unsigned int shaderProgram;
         void Cleanup();
 };
