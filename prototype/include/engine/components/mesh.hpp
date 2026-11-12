@@ -1,5 +1,9 @@
+#pragma once
+
 struct Mesh {
-    const string& path;
-    unsigned int VBO, EBO, VAO;
+    float* vertices;
+    unsigned int* indices;
+
+    unsigned int vertexCount;
     unsigned int indexCount;
 };

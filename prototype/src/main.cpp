@@ -14,6 +14,7 @@
 #include "engine/ecs_core/component_manager.hpp"
 #include "engine/ecs_core/entity_manager.hpp"
 #include "engine/components/transform.hpp"
+#include "engine/components/mesh.hpp"
 
 #include "engine/renderer/modelLoader.hpp"
 
@@ -254,6 +255,9 @@ int main() {
     components.AddComponent<Transform>(cube1, 1.0, 0.0, 0.0, 0.0, 45.0, 0.0, 1.0, 1.0, 1.0);
     components.AddComponent<Transform>(cube2, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 1.0);
 
+    components.AddComponent<Mesh>(cube1, vertices, indices, sizeof(vertices) / sizeof(vertices[0]), sizeof(indices) / sizeof(indices[0]));
+    components.AddComponent<Mesh>(cube2, vertices, indices, sizeof(vertices) / sizeof(vertices[0]), sizeof(indices) / sizeof(indices[0]));
+
     ModelLoader modelLoader;
 
     while (isRunning) {
@@ -281,7 +285,11 @@ int main() {
         auto entities = components.GetEntitiesWith<Transform>();
         for (Entity entity : entities) {
             auto& transform = components.GetComponent<Transform>(entity);
+            auto& mesh = components.GetComponent<Mesh>(entity);
 
+            modelLoader.DrawMesh(transform, mesh);
+
+            /*
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, glm::vec3(transform.xPos, transform.yPos, transform.zPos));
             model = glm::rotate(model, glm::radians(transform.xRot), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -300,6 +308,7 @@ int main() {
             glBindVertexArray(VAO);
             
             glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(indices[0]), GL_UNSIGNED_INT, 0);
+            */
         }
 
         ImGui_ImplOpenGL3_NewFrame();

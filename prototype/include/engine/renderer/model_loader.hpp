@@ -5,11 +5,14 @@
 #include <glm/glm.hpp>
 #include <tinyxml2.h>
 
+#include "engine/components/transform.hpp"
+#include "engine/components/mesh.hpp"
+
 class ModelLoader {
     public:
         ModelLoader();
         ~ModelLoader();
-        //void drawModels(Shader& shader);
+        void DrawModels(Transform& transform, Mesh& mesh);
     private:
-        void cleanup();
+        void Cleanup();
 };
