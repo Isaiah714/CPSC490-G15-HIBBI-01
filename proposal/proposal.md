@@ -96,6 +96,8 @@ lot of bloat and does not meet our core goal.
 
 ## 4. Required Environment, Resources, and Planned Activities
 
+### Environment & Resources
+
 Framework: OpenGL 3.3 - The oldest version that supports modern features where we can implement the rendering pipline less tedious
 
 Language: C++26 - Have all latest features available and use them when helpful
@@ -109,93 +111,67 @@ SDL3 (Simple DirecMedia Layer) - Handle player input, window events, and audio
 Assimp (Open Asset Import Library) - To be able to load in assets    
 stb_image - Provides a more practical way to render textures onto meshes
 
-
-
-**Diagrams belong in this section.** Include at minimum a high-level
-architecture diagram and a system (context) diagram; add the ER/EER model and
-a data-flow diagram where they help the reader understand what you are
-building and what it depends on. Draw them with any graphical tool
-(Lucidchart, draw.io, Miro, Mermaid, ERDPlus, Figma), keep the authoritative
-copies in `docs/design/` with both editable source and exported image, and
-reference them here.
-
-〈Number every figure, caption it, and point at it from the prose — "Figure 1
-shows the three deployment tiers and the trust boundary between them." A
-figure the text never mentions is decoration. See `docs/design/DIAGRAMS.md`
-for tools, conventions, and the rule that every box and arrow must be
-verified against reality.〉
+### Diagrams
 
 ![Architecture Diagram](../docs/design/diagrams/architecture.png)
 
 *Figure 1 - High Level architecture of proposed game engine framework. The diagram illustrates two primary project components, the game engine and game demo, as well as the scene editor component. As well as their internal subsystems and relationships between the editor, engine runtime, and game demo*
+\
+\
+\
+\
+\
+![System Context Diagram](../docs/design/Diagrams/system-context-diagram.png)
+
+*Figure 2 - System context of the proposed game engine framework. The diagrame illustrates the primary users as well as their interaction with both the game engine and the game demo*
 
 ### Specification and design documents
 
-**Every specification and design document the team writes is listed here**
-with the objective it serves. This section is the index of the project's
-technical detail: §3 holds the argument, §4 holds the documents that make it
-buildable. CI gate G9 fails if a document exists in `docs/specs/` or
-`docs/design/` that this section does not link.
-
 | Document | Kind | Covers | Issues |
 |---|---|---|---|
-| 〈docs/specs/game-engine.md〉 | specification | game engine requirements〉 | 〈#49〉 |
-| 〈docs/specs/game-demo.md〉 | specification | game demo requirements〉 | 〈#49〉 |
-
-〈The scaffold ships `docs/specs/example-spec.md` and
-`docs/design/example-design.md` as worked examples — read them, then delete
-them once you have your own, and list yours here.〉
-
-〈Replace these rows with your own. Each document names its epic and stories
-in its own first lines too (gate G2), so the trail runs both ways.〉
+| docs/design/architecture.md | design | architechture diagrams | #48 |
+| docs/specs/game-engine.md | specification | game engine requirements | #49 |
+| docs/specs/game-demo.md | specification | game demo requirements | #49 |
 
 ### Planned activities — the work items
 
-The goals and objectives live in §2 as epics and user stories. **This section
-links every *other* work item: features, enhancements, bugs, tasks, and
-sub-tasks** — the concrete activities that deliver those objectives. CI gate
-G8 fails if such an issue exists that this section does not link.
-
 | Issue | Type | Activity | Parent | Owner | Sprint |
 |---|---|---|---|---|---|
-| 〈#9〉 | 〈task〉 | 〈Window and Renderer〉 | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/32] | 〈Isaiah〉 | 〈Sprint 2〉 |
-| <#10>  | <task/documentation>  | <Draft Introduction Background>  | []  | <Brandon>  | <Sprint 1>  |
-| <#11>  | <task/documentation>  | <Draft Problem & Difference>  | []  | <Brian>  | <Sprint 1>  |
-| <#12>  | <task>  | <Fill the cover fields>  | []  | <Brain>  | <Sprint 1>  |
-| <#16>  | <task>  | <Absract Documentation>  | []  | <Homan>  | <Sprint 1>  |
-| <#24>  | epic>  | <Game Engine>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | <Isaiah>  | <Sprint 3>  |
-| <#25>  | <user-story>  | <Game Demo>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25] | <Isaiah>  | <Sprint 3>  |
-| <#26>  | <user-story>  | <Implement enemies>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | <Isaiah>  | <Sprint 3>  |
-| <#27>  | <user-story>  | <Create gameplay loop>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | <Isaiah>  | <Sprint 3>  |
-| <#28>  | <user-story>  | <Implement player inputs and interaction>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | <Isaiah>  | <Sprint 3>  |
-| <#29>  | <user-story>  | <Implement world building>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | <Isaiah>  | <Sprint 3>  |
-| <#30>  | <user-story>  | <Implement ECS architecture>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | <Isaiah>  | <Sprint 3>  |
-| <#31>  | <user-story>  | <Demonstrate muliplatform compilation>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | <Isaiah>  | <Sprint 3>  |
-| <#32>  | <user-story>  | <Create real time render system>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | <Isaiah>  | <Sprint 3>  |
-| <#33>  | <user-story>  | <Implement visual editor>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | <Isaiah>  | <Sprint 3>  |
-| <#34>  | <task/documentation>  | <Write Related Work>  | []  | <Isaac>  | <Sprint 1>  |
-| <#35>  | <task/documentation>  | <Write Goals and Objectives>  | []  | <Isaiah>  | <Sprint 1>  |
-| <#36>  | <task/documentation>  | <Write Problem Statements>  | []  | <Brian>  | <Sprint 1>  |
-| <#40>  | <task/documentation>  | <Revise Section 0 and 1>  | []  | <Isaac>  | <Sprint 1>  |
-| <#44>  | <documentation>  | <Fixing section 2 and 4>  | []  | <Isaiah>  | <Sprint 2>  |
-| <#46>  | <task>  | <Setting Up CMake environment>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/46]  | <Homan>  | <Sprint 2>  |
-| <#47>  | <documentation>  | <System Context Diagram>  | []  | <Isaac>  | <Sprint 2>  |
-| <#48>  | <documentation>  | <Architecture Diagram>  | []  | <Brandon>  | <Sprint 2>  |
-| <#49>  | <documentation>  | <Specification Requiremnts>  | []  | <Isaiah>  | <Sprint 2>  |
-| <#50>  | <documentation>  | <Revise Sprint 1>  | []  | <Isaac>  | <Sprint 2>  |
-| <#54>  | <documentation>  | <Fixing spacing Proposal.md>  | []  | <Isaiah>  | <Sprint 3>  |
-| <#57>  | <task>  | <Updating environment>  | []  | <Homan>  | <Sprint 3>  |
-| <#58>  | <task>  | <Add choices in environment list>  | []  | <Isaiah>  | <Sprint 3>  |
-| <#61>  | <documentation>  | <Updating Proposal with issues>  | []  | <Isaiah>  | <Sprint 3>  |
-| <#63>  | <task>  | <Implement Basic ECS system>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/30]  | <Homan>  | <Sprint 3>  |
-| <#64>  | <>  | <Environment Folder Organization>  | []  | <Brandon>  | <Sprint 3>  |
-| <#66>  | <task>  | <Link SDL3 and Assimp into machine code>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/31]  | <Homan>  | <Sprint 3>  |
-| <#67>  | <task>  | <Import ImGui and basic UI>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/33]  | <Isaac>  | <Sprint 3>  |
-| <#70>  | <bug/enhancemnt>  | <Add files for implementation>  | []  | <Homan>  | <Sprint 3>  |
-
-〈Replace these rows with your own, and keep the table current as you file new
-issues — with §2 it gives a reader every planned activity in one place, each
-traceable to the objective it serves.〉
+| #9  | task | Window and Renderer | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/32] | Isaiah | Sprint 2 |
+| #10  | task/documentation  | Draft Introduction Background  |   | Brandon  | Sprint 1  |
+| #11  | task/documentation  | Draft Problem & Difference  |   | Brian  | Sprint 1  |
+| #12  | task | Fill the cover fields  |   | Brain  | Sprint 1  |
+| #16  | task | Absract Documentation  |   | Homan  | Sprint 1  |
+| #24  | epic | Game Engine  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | Isaiah  | Sprint 3  |
+| #25  | user-story | Game Demo  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25] | Isaiah  | Sprint 3  |
+| #26  | user-story | Implement enemies  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | Isaiah  | Sprint 3  |
+| #27  | user-story  | Create gameplay loop  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | Isaiah  | Sprint 3  |
+| #28  | user-story  | Implement player inputs and interaction>  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | Isaiah  | Sprint 3  |
+| #29  | user-story  | Implement world building  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/25]  | Isaiah  | Sprint 3  |
+| #30  | user-story  | Implement ECS architecture  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | Isaiah  | Sprint 3  |
+| #31  | user-story  | Demonstrate muliplatform compilation  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | Isaiah  | Sprint 3  |
+| #32  | user-story  | Create real time render system  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | Isaiah  | Sprint 3  |
+| #33  | user-story  | Implement visual editor  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/24]  | Isaiah  | Sprint 3  |
+| #34  | task/documentation  | Write Related Work  |   | Isaac  | Sprint 1  |
+| #35  | task/documentation  | Write Goals and Objectives  |   | Isaiah  | Sprint 1  |
+| #36  | task/documentation  | Write Problem Statements  |   | Brian  | Sprint 1  |
+| #40  | task/documentation  | Revise Section 0 and 1  |   | Isaac  | Sprint 1  |
+| #44  | documentation  | Fixing section 2 and 4  |   | Isaiah  | Sprint 2  |
+| #46  | task  | Setting Up CMake environment  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/46]  | Homan  | Sprint 2  |
+| #47  | documentation  | System Context Diagram  |   | Isaac  | Sprint 2  |
+| #48  | documentation  | Architecture Diagram  |   | Brandon  | Sprint 2  |
+| #49  | documentation  | Specification Requiremnts  |   | Isaiah  | Sprint 2  |
+| #50  | documentation  | Revise Sprint 1  |   | Isaac  | Sprint 2 |
+| #54  | documentation  | Fixing spacing Proposal.md  |   | Isaiah  | Sprint 3  |
+| #57  | task  | Updating environment  |   | Homan  | Sprint 3  |
+| #58  | task  | Add choices in environment list  |   | Isaiah  | Sprint 3  |
+| #61  | documentation  | Updating Proposal with issues  |   | Isaiah  | Sprint 3  |
+| #63  | task  | Implement Basic ECS system  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/30]  | Homan  | Sprint 3  |
+| #64  | task  | Environment Folder Organization  |   | Brandon  | Sprint 3  |
+| #66  | task  | Link SDL3 and Assimp into machine code  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/31]  | Homan  | Sprint 3  |
+| #67  | task  | Import ImGui and basic UI  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/33]  | Isaac  | Sprint 3  |
+| #70  | bug/enhancement  | Add files for implementation  |   | Homan  | Sprint 3  |
+| #74  | task  | Section 4 Fixes  |   | Isaiah  | Sprint 3  |
 
 ## 5. Project Outcomes
 
