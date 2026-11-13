@@ -12,7 +12,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <tinyxml2.h>
 
 #include "engine/renderer/model_loader.hpp"
 
