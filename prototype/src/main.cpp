@@ -266,8 +266,6 @@ int main() {
         ImGui::BeginMainMenuBar();
         if (ImGui::BeginMenu("Insert")) {
             if (ImGui::MenuItem("Cube")) {
-                //modelLoader.drawModels();
-
                 Entity newCube = manager.CreateEntity();
 
                 components.AddComponent<Transform>(newCube, 0.0, 0.0, 0.0, 0.0, 45.0, 0.0, 1.0, 1.0, 1.0);
