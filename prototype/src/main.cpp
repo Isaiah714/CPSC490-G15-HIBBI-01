@@ -221,12 +221,16 @@ int main() {
     components.AddComponent<Transform>(cube1, 1.0, 0.0, 0.0, 0.0, 45.0, 0.0, 1.0, 1.0, 1.0);
     components.AddComponent<Transform>(cube2, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 1.0);
 
-    components.AddComponent<Mesh>(cube1, vertices, indices, 0, 0, 0);
-    components.AddComponent<Mesh>(cube2, vertices, indices, 0, 0, 0);
+    std::vector<float> vertexList(std::begin(vertices), std::end(vertices));
+    std::vector<unsigned int> indexList(std::begin(indices), std::end(indices));
+
+    components.AddComponent<Mesh>(cube1, vertexList, indexList, 0, 0, 0);
+    components.AddComponent<Mesh>(cube2, vertexList, indexList, 0, 0, 0);
 
     ModelLoader modelLoader(shaderProgram);
-    modelLoader.SetupMesh(cube1.GetComponent<Mesh>);
-    modelLoader.SetupMesh(cube2.GetComponent<Mesh>);
+
+    modelLoader.SetupMesh(components.GetComponent<Mesh>(cube1));
+    modelLoader.SetupMesh(components.GetComponent<Mesh>(cube2));
 
     while (isRunning) {
         while (SDL_PollEvent(&event)) {
