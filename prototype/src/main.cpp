@@ -229,9 +229,6 @@ int main() {
 
     ModelLoader modelLoader(shaderProgram);
 
-    modelLoader.SetupMesh(components.GetComponent<Mesh>(cube1));
-    modelLoader.SetupMesh(components.GetComponent<Mesh>(cube2));
-
     while (isRunning) {
         while (SDL_PollEvent(&event)) {
             ImGui_ImplSDL3_ProcessEvent(&event);
@@ -257,6 +254,7 @@ int main() {
             auto& transform = components.GetComponent<Transform>(entity);
             auto& mesh = components.GetComponent<Mesh>(entity);
 
+            modelLoader.SetupMesh(mesh);
             modelLoader.DrawMesh(transform, mesh);
         }
 
