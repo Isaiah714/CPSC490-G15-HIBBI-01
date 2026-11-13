@@ -1,9 +1,9 @@
 #pragma once
+#include <vector>
 
 struct Mesh {
-    float* vertices;
-    unsigned int* indices;
+    std::vector<float> vertices;
+    std::vector<unsigned int> indices;
 
-    unsigned int vertexCount;
-    unsigned int indexCount;
+    unsigned int VAO, VBO, EBO;
 };

@@ -88,6 +88,7 @@ glm::vec3 cubeColor = glm::vec3(1.0f, 0.0f, 0.0f);
 glm::vec3 lightPos = glm::vec3(-3.0f, 3.0f, 2.0f);
 
 // Camera Data
+/*
 float camRad = 5.0f;
 glm::vec3 camTarget = glm::vec3(0.0f, 0.0f, 0.0f);
 float camYaw = 0.0f;
@@ -96,6 +97,7 @@ glm::vec3 cameraPos = glm::vec3(camRad * std::sin(glm::radians(camYaw)) * std::c
                                 camRad * std::sin(glm::radians(camPitch)) + camTarget.y,
                                 camRad * std::cos(glm::radians(camYaw)) * std::cos(glm::radians(camPitch)) + camTarget.z);
 float fieldOfView = 45.0f;
+*/
 
 /**
  * @brief Compiles a shader from a given source file path
@@ -206,42 +208,6 @@ int main() {
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    // Initialize VAO, VBO, and EBO
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-    
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    // Pass vertex position attribute with span and size matching the cube vertex layout
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*) 0);
-    glEnableVertexAttribArray(0);
-    
-    // Pass vertex normal attribute with span and size matching the cube normal layout
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0); 
-
-    glBindVertexArray(0);
-
-    float aspect = (float)WIDTH/(float)HEIGHT;
-
-    // Vertex Shader Uniforms
-    unsigned int modelLoc = glGetUniformLocation(shaderProgram, "u_Model");
-    unsigned int viewLoc = glGetUniformLocation(shaderProgram, "u_View");
-    unsigned int projLoc = glGetUniformLocation(shaderProgram, "u_Projection");
-
-    // Fragment Shader Uniforms
-    unsigned int colorLoc = glGetUniformLocation(shaderProgram, "u_Color");
-    unsigned int lightPosLoc = glGetUniformLocation(shaderProgram, "u_LightPos");
-
     bool isRunning = true;
     SDL_Event event;
 
@@ -255,10 +221,12 @@ int main() {
     components.AddComponent<Transform>(cube1, 1.0, 0.0, 0.0, 0.0, 45.0, 0.0, 1.0, 1.0, 1.0);
     components.AddComponent<Transform>(cube2, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 1.0);
 
-    components.AddComponent<Mesh>(cube1, vertices, indices, sizeof(vertices) / sizeof(vertices[0]), sizeof(indices) / sizeof(indices[0]));
-    components.AddComponent<Mesh>(cube2, vertices, indices, sizeof(vertices) / sizeof(vertices[0]), sizeof(indices) / sizeof(indices[0]));
+    components.AddComponent<Mesh>(cube1, vertices, indices, 0, 0, 0);
+    components.AddComponent<Mesh>(cube2, vertices, indices, 0, 0, 0);
 
     ModelLoader modelLoader(shaderProgram);
+    modelLoader.SetupMesh(cube1.GetComponent<Mesh>);
+    modelLoader.SetupMesh(cube2.GetComponent<Mesh>);
 
     while (isRunning) {
         while (SDL_PollEvent(&event)) {
@@ -278,8 +246,6 @@ int main() {
 
         glUseProgram(shaderProgram);
 
-        glm::mat4 view = glm::lookAt(cameraPos, camTarget, glm::vec3(0.0f, 1.0f, 0.0f));
-        glm::mat4 projection = glm::perspective(glm::radians(fieldOfView), aspect, 0.1f, 100.0f);
         // Model matrix with cube rotated 45 degrees
         // Get all entities with transform components, and render them
         auto entities = components.GetEntitiesWith<Transform>();
@@ -288,27 +254,6 @@ int main() {
             auto& mesh = components.GetComponent<Mesh>(entity);
 
             modelLoader.DrawMesh(transform, mesh);
-
-            /*
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(transform.xPos, transform.yPos, transform.zPos));
-            model = glm::rotate(model, glm::radians(transform.xRot), glm::vec3(0.0f, 1.0f, 0.0f));
-            model = glm::rotate(model, glm::radians(transform.yRot), glm::vec3(0.0f, 1.0f, 0.0f));
-            model = glm::rotate(model, glm::radians(transform.zRot), glm::vec3(0.0f, 1.0f, 0.0f));
-            model = glm::scale(model, glm::vec3(transform.xScale, transform.yScale, transform.zScale));
-
-            // Push matrices to shader
-            glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-            glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-            
-            glUniform3fv(colorLoc, 1, glm::value_ptr(cubeColor));
-            glUniform3fv(lightPosLoc, 1, glm::value_ptr(lightPos));
-            
-            glBindVertexArray(VAO);
-            
-            glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(indices[0]), GL_UNSIGNED_INT, 0);
-            */
         }
 
         ImGui_ImplOpenGL3_NewFrame();
