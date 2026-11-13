@@ -173,6 +173,8 @@ stb_image - Provides a more practical way to render textures onto meshes
 | #67  | task  | Import ImGui and basic UI  | [story:https://github.com/Isaiah714/CPSC490-G15-HIBBI-01/issues/33]  | Isaac  | Sprint 3  |
 | #70  | bug/enhancement  | Add files for implementation  |   | Homan  | Sprint 3  |
 | #74  | task  | Section 4 Fixes  |   | Isaiah  | Sprint 3  |
+| #80  | documention  | Added system-context-diagram to section 4  |   | Isaac  | Sprint 4  |
+
 
 ## 5. Project Outcomes
 
