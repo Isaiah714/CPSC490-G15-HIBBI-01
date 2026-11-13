@@ -84,7 +84,7 @@ void ModelLoader::DrawMesh(Transform& transform, Mesh& mesh) {
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-    glUniform3fv(colorLoc, 1, glm::value_ptr(cubeColor));
+    glUniform3fv(colorLoc, 1, glm::value_ptr(mesh.color));
     glUniform3fv(lightPosLoc, 1, glm::value_ptr(lightPos));
 
     glBindVertexArray(mesh.VAO);

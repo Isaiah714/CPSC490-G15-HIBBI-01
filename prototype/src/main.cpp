@@ -23,7 +23,6 @@
 #include <sstream>
 #include <string>
 
-unsigned int VAO, VBO, EBO;
 const int WIDTH = 800;
 const int HEIGHT = 600;
 
@@ -82,10 +81,8 @@ unsigned int indices[] = {
     20, 22, 21
 };
 
-glm::vec3 cubeColor = glm::vec3(1.0f, 0.0f, 0.0f);
-
 // Light Data
-glm::vec3 lightPos = glm::vec3(-3.0f, 3.0f, 2.0f);
+//glm::vec3 lightPos = glm::vec3(-3.0f, 3.0f, 2.0f);
 
 // Camera Data
 /*
@@ -211,28 +208,49 @@ int main() {
     bool isRunning = true;
     SDL_Event event;
 
-    // Initialize entity manager and create 2 cube entities
+    // Initialize entity manager and create 100 cube entities
     EntityManager manager;
-    Entity cube1 = manager.CreateEntity();
-    Entity cube2 = manager.CreateEntity();
-
-    // Create transform components and store at the cube entity id indices
     ComponentManager components;
-    components.AddComponent<Transform>(cube1, 1.0, 0.0, 0.0, 0.0, 45.0, 0.0, 1.0, 1.0, 1.0);
-    components.AddComponent<Transform>(cube2, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 1.0);
+
+    ModelLoader modelLoader(shaderProgram);
 
     std::vector<float> vertexList(std::begin(vertices), std::end(vertices));
     std::vector<unsigned int> indexList(std::begin(indices), std::end(indices));
 
-    components.AddComponent<Mesh>(cube1, vertexList, indexList, 0, 0, 0);
-    components.AddComponent<Mesh>(cube2, vertexList, indexList, 0, 0, 0);
+    const int numCubes = 100;
+    // Creating each cube with a random color assinged
+    for(int i = 0; i < numCubes; ++i) {
+        Entity cube = manager.CreateEntity();
 
-    ModelLoader modelLoader(shaderProgram);
+        // Organizing cubes into a grid like layout
+        int col = i % 10;
+        int row = i / 10;
+        
+        // Aligns the cubes to fit into the scene
+        float x = (col - 4.5f) * 0.5f; 
+        float y = (row - 4.5f) * 0.38f; 
+        float z = ((i % 5) - 2.0f) * 0.15f;
 
-    modelLoader.SetupMesh(components.GetComponent<Mesh>(cube1));
-    modelLoader.SetupMesh(components.GetComponent<Mesh>(cube2));
+        // Random color is assinged to a hashmap 
+        glm::vec3 randomColor(
+            0.2f + static_cast<float>(rand()) / RAND_MAX * 0.8f,
+            0.2f + static_cast<float>(rand()) / RAND_MAX * 0.8f,
+            0.2f + static_cast<float>(rand()) / RAND_MAX * 0.8f
+        );
+
+        components.AddComponent<Transform>(cube, x, y, z, 0.0f, static_cast<float>(i * 10), 0.0f, 0.3f, 0.3f, 0.3f);
+        components.AddComponent<Mesh>(cube, vertexList, indexList, randomColor);
+        modelLoader.SetupMesh(components.GetComponent<Mesh>(cube));
+    }
+
+    // Variable needed for delta time
+    Uint64 lastTime = SDL_GetTicks();
 
     while (isRunning) {
+        // Gives frame rate independency, prevents hardware from speeding up animations.
+        Uint64 currentTime = SDL_GetTicks();
+        float deltaTime = (currentTime - lastTime) / 1000.0f;
+        lastTime = currentTime;
         while (SDL_PollEvent(&event)) {
             ImGui_ImplSDL3_ProcessEvent(&event);
             if (event.type == SDL_EVENT_QUIT) {
@@ -245,6 +263,20 @@ int main() {
             }
         }
 
+        // Get all entities to give a simple rotation animation
+        auto entities = components.GetEntitiesWith<Transform>();
+        int i = 0;
+        float totalTime = currentTime * 0.001f;
+        for(Entity entity : entities) {
+            auto & transform = components.GetComponent<Transform>(entity);
+
+            transform.xRot += 10.0f * deltaTime;
+            transform.yRot += 35.0f * deltaTime;
+            transform.zRot += std::sin(totalTime + i) * 0.0003f;
+
+            i++;
+        }
+
         glClearColor(0.12f, 0.20f, 0.25f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -252,7 +284,6 @@ int main() {
 
         // Model matrix with cube rotated 45 degrees
         // Get all entities with transform components, and render them
-        auto entities = components.GetEntitiesWith<Transform>();
         for (Entity entity : entities) {
             auto& transform = components.GetComponent<Transform>(entity);
             auto& mesh = components.GetComponent<Mesh>(entity);
@@ -269,11 +300,12 @@ int main() {
                 Entity newCube = manager.CreateEntity();
 
                 components.AddComponent<Transform>(newCube, 0.0, 0.0, 0.0, 0.0, 45.0, 0.0, 1.0, 1.0, 1.0);
-                components.AddComponent<Mesh>(newCube, vertexList, indexList, 0, 0, 0);
+                components.AddComponent<Mesh>(newCube, vertexList, indexList, glm::vec3(1, 0, 0));
                 modelLoader.SetupMesh(components.GetComponent<Mesh>(newCube));
             }
             ImGui::EndMenu();
         }
+
 	ImGui::Separator();
         ImGui::Text("%.1f FPS", io.Framerate);
         ImGui::EndMainMenuBar();

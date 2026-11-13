@@ -101,6 +101,55 @@ jobs:
           elif [ "$rc" -ne 0 ]; then
             exit "$rc"
           fi
+      
+      # --- C++ prototypes ------------------------------------------
+      - name: Detect CMake project
+        id: cmake
+        run: |
+          if [ -f prototype/CMakeLists.txt ]; then echo "found=true" >> "$GITHUB_OUTPUT";
+          else echo "found=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Install Linux graphics & windowing dependencies (CMake)
+        if: steps.cmake.outputs.found == 'true' && runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libgl1-mesa-dev \
+            libglu1-mesa-dev \
+            libasound2-dev \
+            libwayland-dev \
+            libxcursor-dev \
+            libxi-dev \
+            libxinerama-dev \
+            libxkbcommon-dev \
+            libxrandr-dev
+
+      - name: Configure CMake
+        if: steps.cmake.outputs.found == 'true'
+        run: cmake -S prototype -B prototype/build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build C++ project
+        if: steps.cmake.outputs.found == 'true'
+        run: cmake --build prototype/build --config Release -j$(nproc)
+
+      - name: Run Tests (CMake)
+        if: steps.cmake.outputs.found == 'true'
+        run: |
+          if [ -f prototype/build/test_engine_components ] || [ -f prototype/build/Debug/test_engine_components.exe ] || [ -f prototype/build/Release/test_engine_components.exe ]; then
+            if [ -f prototype/build/test_engine_components ]; then
+              ./prototype/build/test_engine_components
+            elif [ -f prototype/build/Release/test_engine_components.exe ]; then
+              ./prototype/build/Release/test_engine_components.exe
+            else
+              ./prototype/build/Debug/test_engine_components.exe
+            fi
+          elif [ -f prototype/build/tests ] || [ -f prototype/build/run_tests ]; then
+            ./prototype/build/tests || ./prototype/build/run_tests
+          elif ctest --test-dir prototype/build --show-only=json | grep -q "name"; then
+            ctest --test-dir prototype/build --output-on-failure
+          else
+            echo "::warning::CMake project compiled successfully, but no test suite was found."
+          fi
 
       - name: Nothing to build
         if: steps.node.outputs.found == 'false' && steps.py.outputs.found == 'false'

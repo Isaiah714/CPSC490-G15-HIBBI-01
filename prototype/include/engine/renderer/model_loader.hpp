@@ -29,8 +29,6 @@ class ModelLoader {
         camTarget.y,
                                         camRad * std::cos(glm::radians(camYaw)) * std::cos(glm::radians(camPitch)) + camTarget.z);
         float fieldOfView = 45.0f;
-
-        glm::vec3 cubeColor = glm::vec3(1.0f, 0.0f, 0.0f);
         glm::vec3 lightPos = glm::vec3(-3.0f, 3.0f, 2.0f);
 
         glm::mat4 view = glm::lookAt(cameraPos, camTarget, glm::vec3(0.0f, 1.0f, 0.0f));
