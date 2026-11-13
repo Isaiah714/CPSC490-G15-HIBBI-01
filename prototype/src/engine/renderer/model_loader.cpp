@@ -36,7 +36,10 @@ void ModelLoader::LoadModel(const std::string& path) {
     */
 }
 
-
+/**
+ * @brief Instantiate all the data needed for the mesh
+ * @param Mesh component that is given data to be binded
+ */
 void ModelLoader::SetupMesh(Mesh& mesh) {
     glGenVertexArrays(1, &mesh.VAO);
     glGenBuffers(1, &mesh.VBO);
@@ -70,6 +73,11 @@ void ModelLoader::SetupMesh(Mesh& mesh) {
     lightPosLoc = glGetUniformLocation(shaderProgram, "u_LightPos");
 }
 
+/**
+ * @brief Draws the mesh given components
+ * @param Transform component for the mesh rendered
+ * @param Mesh component for the actual apperance
+ */
 void ModelLoader::DrawMesh(Transform& transform, Mesh& mesh) {
 
     glm::mat4 model = glm::mat4(1.0f);
