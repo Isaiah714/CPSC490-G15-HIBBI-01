@@ -129,6 +129,7 @@ stb_image - Provides a more practical way to render textures onto meshes
 
 | Document | Kind | Covers | Issues |
 |---|---|---|---|
+| docs/design/system-context-diagram.md | design | system context diagram | #47 |
 | docs/design/architecture.md | design | architechture diagrams | #48 |
 | docs/specs/game-engine.md | specification | game engine requirements | #49 |
 | docs/specs/game-demo.md | specification | game demo requirements | #49 |
