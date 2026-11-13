@@ -1,5 +1,9 @@
 #include "glad/glad.h"
+
 #include <assimp/aabb.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -22,6 +26,16 @@ ModelLoader::ModelLoader(unsigned int shader) {
 ModelLoader::~ModelLoader() {
     Cleanup();
 }
+
+void ModelLoader::LoadModel(const std::string& path) {
+    Assimp::Importer importer;
+    /*
+    const aiScene* scene = importer.ReadFile(path,
+        aiProcess_Triangulate |
+        aiProcess_GenNormals);
+    */
+}
+
 
 void ModelLoader::SetupMesh(Mesh& mesh) {
     glGenVertexArrays(1, &mesh.VAO);
@@ -54,7 +68,6 @@ void ModelLoader::SetupMesh(Mesh& mesh) {
 
     colorLoc = glGetUniformLocation(shaderProgram, "u_Color");
     lightPosLoc = glGetUniformLocation(shaderProgram, "u_LightPos");
-    std::cout << mesh.VAO << ", " << mesh.EBO << ", "<< mesh.VBO << '\n';
 }
 
 void ModelLoader::DrawMesh(Transform& transform, Mesh& mesh) {
@@ -77,8 +90,6 @@ void ModelLoader::DrawMesh(Transform& transform, Mesh& mesh) {
     glBindVertexArray(mesh.VAO);
 
     glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
-
-    std::cout << mesh.VAO << ", " << mesh.EBO << ", "<< mesh.VBO << '\n';
 }
 
 void ModelLoader::Cleanup() {

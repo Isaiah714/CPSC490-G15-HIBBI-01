@@ -4,6 +4,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include <tinyxml2.h>
+#include <string>
 
 #include "engine/components/transform.hpp"
 #include "engine/components/mesh.hpp"
@@ -14,6 +15,7 @@ class ModelLoader {
         ~ModelLoader();
         void SetupMesh(Mesh& mesh);
         void DrawMesh(Transform& transform, Mesh& mesh);
+        void LoadModel(const std::string& path);
     private:
 	unsigned int shaderProgram;
         void Cleanup();
@@ -35,7 +37,5 @@ class ModelLoader {
         glm::mat4 projection = glm::perspective(glm::radians(fieldOfView), 800.0f/600.0f, 0.1f, 100.0f);
 
         unsigned int modelLoc, viewLoc, projLoc;
-
-        // Fragment Shader Uniforms
         unsigned int colorLoc, lightPosLoc;
 };
