@@ -31,10 +31,10 @@ void ModelLoader::SetupMesh(Mesh& mesh) {
     glBindVertexArray(mesh.VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, mesh.VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(mesh.vertices), mesh.vertices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * sizeof(float), mesh.vertices.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(mesh.indices), mesh.indices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(unsigned int), mesh.indices.data(), GL_STATIC_DRAW);
 
     // Pass vertex position attribute with span and size matching the cube vertex layout
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*) 0);
@@ -54,6 +54,7 @@ void ModelLoader::SetupMesh(Mesh& mesh) {
 
     colorLoc = glGetUniformLocation(shaderProgram, "u_Color");
     lightPosLoc = glGetUniformLocation(shaderProgram, "u_LightPos");
+    std::cout << mesh.VAO << ", " << mesh.EBO << ", "<< mesh.VBO << '\n';
 }
 
 void ModelLoader::DrawMesh(Transform& transform, Mesh& mesh) {
@@ -76,6 +77,8 @@ void ModelLoader::DrawMesh(Transform& transform, Mesh& mesh) {
     glBindVertexArray(mesh.VAO);
 
     glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
+
+    std::cout << mesh.VAO << ", " << mesh.EBO << ", "<< mesh.VBO << '\n';
 }
 
 void ModelLoader::Cleanup() {
