@@ -74,33 +74,43 @@ endif()
 file(GLOB_RECURSE ENGINE_SOURCES
     src/*.cpp
     src/*.c
+    tests/*.cpp
 )
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(run
-    ${ENGINE_SOURCES}
+file(GLOB_RECURSE ENGINE_SOURCES
+    src/*.cpp
+    src/*.c
 )
+list(REMOVE_ITEM ENGINE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
 
-target_include_directories(run PRIVATE
+add_library(EngineCore STATIC ${ENGINE_SOURCES})
+
+target_include_directories(EngineCore PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
-target_link_libraries(run PRIVATE
+target_link_libraries(EngineCore PUBLIC
     SDL3::SDL3
     assimp::assimp
     imgui::imgui
 )
 
 if(WIN32)
-    target_link_libraries(run PRIVATE opengl32)
+    target_link_libraries(EngineCore PRIVATE opengl32)
 elseif(APPLE)
     find_package(OpenGL REQUIRED)
-    target_link_libraries(run PRIVATE OpenGL::GL)
+    target_link_libraries(EngineCore PRIVATE OpenGL::GL)
 elseif(UNIX)
     find_package(OpenGL REQUIRED)
     find_package(Threads REQUIRED)
-    target_link_libraries(run PRIVATE OpenGL::GL)
-    target_link_libraries(run PRIVATE Threads::Threads dl)
+    target_link_libraries(EngineCore PRIVATE OpenGL::GL Threads::Threads dl)
 endif()
+
+add_executable(run src/main.cpp)
+target_link_libraries(run PRIVATE EngineCore)
+
+add_executable(test_engine_components tests/test.cpp)
+target_link_libraries(test_engine_components PRIVATE EngineCore)
