@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <glm/glm.hpp>
-#include <tinyxml2.h>
 #include <string>
 
 #include "engine/components/transform.hpp"
