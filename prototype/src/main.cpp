@@ -14,13 +14,15 @@
 #include "engine/ecs_core/component_manager.hpp"
 #include "engine/ecs_core/entity_manager.hpp"
 #include "engine/components/transform.hpp"
+#include "engine/components/mesh.hpp"
+
+#include "engine/renderer/model_loader.hpp"
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
 
-unsigned int VAO, VBO, EBO;
 const int WIDTH = 800;
 const int HEIGHT = 600;
 
@@ -80,9 +82,10 @@ unsigned int indices[] = {
 };
 
 // Light Data
-glm::vec3 lightPos = glm::vec3(-3.0f, 3.0f, 2.0f);
+//glm::vec3 lightPos = glm::vec3(-3.0f, 3.0f, 2.0f);
 
 // Camera Data
+/*
 float camRad = 5.0f;
 glm::vec3 camTarget = glm::vec3(0.0f, 0.0f, 0.0f);
 float camYaw = 0.0f;
@@ -91,6 +94,7 @@ glm::vec3 cameraPos = glm::vec3(camRad * std::sin(glm::radians(camYaw)) * std::c
                                 camRad * std::sin(glm::radians(camPitch)) + camTarget.y,
                                 camRad * std::cos(glm::radians(camYaw)) * std::cos(glm::radians(camPitch)) + camTarget.z);
 float fieldOfView = 45.0f;
+*/
 
 /**
  * @brief Compiles a shader from a given source file path
@@ -201,48 +205,17 @@ int main() {
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    // Initialize VAO, VBO, and EBO
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
-    
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    // Pass vertex position attribute with span and size matching the cube vertex layout
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*) 0);
-    glEnableVertexAttribArray(0);
-    
-    // Pass vertex normal attribute with span and size matching the cube normal layout
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0); 
-
-    glBindVertexArray(0);
-
-    float aspect = (float)WIDTH/(float)HEIGHT;
-
-    // Vertex Shader Uniforms
-    unsigned int modelLoc = glGetUniformLocation(shaderProgram, "u_Model");
-    unsigned int viewLoc = glGetUniformLocation(shaderProgram, "u_View");
-    unsigned int projLoc = glGetUniformLocation(shaderProgram, "u_Projection");
-
-    // Fragment Shader Uniforms
-    unsigned int colorLoc = glGetUniformLocation(shaderProgram, "u_Color");
-    unsigned int lightPosLoc = glGetUniformLocation(shaderProgram, "u_LightPos");
-
     bool isRunning = true;
     SDL_Event event;
+
     // Initialize entity manager and create 100 cube entities
     EntityManager manager;
     ComponentManager components;
-    std::unordered_map<Entity, glm::vec3> cubeColors;
+
+    ModelLoader modelLoader(shaderProgram);
+
+    std::vector<float> vertexList(std::begin(vertices), std::end(vertices));
+    std::vector<unsigned int> indexList(std::begin(indices), std::end(indices));
 
     const int numCubes = 100;
     // Creating each cube with a random color assinged
@@ -258,15 +231,16 @@ int main() {
         float y = (row - 4.5f) * 0.38f; 
         float z = ((i % 5) - 2.0f) * 0.15f;
 
-        components.AddComponent<Transform>(cube, x, y, z, 0.0f, static_cast<float>(i * 10), 0.0f, 0.3f, 0.3f, 0.3f);
-
         // Random color is assinged to a hashmap 
         glm::vec3 randomColor(
             0.2f + static_cast<float>(rand()) / RAND_MAX * 0.8f,
             0.2f + static_cast<float>(rand()) / RAND_MAX * 0.8f,
             0.2f + static_cast<float>(rand()) / RAND_MAX * 0.8f
         );
-        cubeColors[cube] = randomColor;
+
+        components.AddComponent<Transform>(cube, x, y, z, 0.0f, static_cast<float>(i * 10), 0.0f, 0.3f, 0.3f, 0.3f);
+        components.AddComponent<Mesh>(cube, vertexList, indexList, randomColor);
+        modelLoader.SetupMesh(components.GetComponent<Mesh>(cube));
     }
 
     // Variable needed for delta time
@@ -308,39 +282,31 @@ int main() {
 
         glUseProgram(shaderProgram);
 
-        glm::mat4 view = glm::lookAt(cameraPos, camTarget, glm::vec3(0.0f, 1.0f, 0.0f));
-        glm::mat4 projection = glm::perspective(glm::radians(fieldOfView), aspect, 0.1f, 100.0f);
-
         // Model matrix with cube rotated 45 degrees
         // Get all entities with transform components, and render them
         for (Entity entity : entities) {
             auto& transform = components.GetComponent<Transform>(entity);
+            auto& mesh = components.GetComponent<Mesh>(entity);
 
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(transform.xPos, transform.yPos, transform.zPos));
-            model = glm::rotate(model, glm::radians(transform.xRot), glm::vec3(1.0f, 0.0f, 0.0f));
-            model = glm::rotate(model, glm::radians(transform.yRot), glm::vec3(0.0f, 1.0f, 0.0f));
-            model = glm::rotate(model, glm::radians(transform.zRot), glm::vec3(0.0f, 0.0f, 1.0f));
-            model = glm::scale(model, glm::vec3(transform.xScale, transform.yScale, transform.zScale));
-
-            // Push matrices to shader
-            glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-            glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-            
-            glm::vec3 currentCubeColor = cubeColors[entity];
-            glUniform3fv(colorLoc, 1, glm::value_ptr(currentCubeColor));
-            glUniform3fv(lightPosLoc, 1, glm::value_ptr(lightPos));
-            
-            glBindVertexArray(VAO);
-            
-            glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(indices[0]), GL_UNSIGNED_INT, 0);
+            modelLoader.DrawMesh(transform, mesh);
         }
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplSDL3_NewFrame();
         ImGui::NewFrame();
         ImGui::BeginMainMenuBar();
+        if (ImGui::BeginMenu("Insert")) {
+            if (ImGui::MenuItem("Cube")) {
+                Entity newCube = manager.CreateEntity();
+
+                components.AddComponent<Transform>(newCube, 0.0, 0.0, 0.0, 0.0, 45.0, 0.0, 1.0, 1.0, 1.0);
+                components.AddComponent<Mesh>(newCube, vertexList, indexList, glm::vec3(1, 0, 0));
+                modelLoader.SetupMesh(components.GetComponent<Mesh>(newCube));
+            }
+            ImGui::EndMenu();
+        }
+
+	ImGui::Separator();
         ImGui::Text("%.1f FPS", io.Framerate);
         ImGui::EndMainMenuBar();
         ImGui::Render();
