@@ -22,6 +22,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <format>
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
@@ -313,8 +314,14 @@ int main() {
         ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiCond_Always);
         ImGui::SetNextWindowSize(ImVec2(280, io.DisplaySize.y - 20), ImGuiCond_Always);
         ImGui::Begin("Hierarchy", NULL, ImGuiWindowFlags_NoResize);
+        for(Entity entity : entities) {
+            ImGui::Text(std::to_string(entity).c_str());
+        }
         ImGui::End();
-
+        ImGui::SetNextWindowPos(ImVec2(io.DisplaySize.x - 280, 20), ImGuiCond_Always);
+        ImGui::SetNextWindowSize(ImVec2(280, io.DisplaySize.y - 20), ImGuiCond_Always);
+        ImGui::Begin("Properties", NULL, ImGuiWindowFlags_NoResize);
+        ImGui::End();
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         SDL_GL_SwapWindow(window);
