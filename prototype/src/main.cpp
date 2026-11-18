@@ -309,6 +309,12 @@ int main() {
 	ImGui::Separator();
         ImGui::Text("%.1f FPS", io.Framerate);
         ImGui::EndMainMenuBar();
+
+        ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiCond_Always);
+        ImGui::SetNextWindowSize(ImVec2(280, io.DisplaySize.y - 20), ImGuiCond_Always);
+        ImGui::Begin("Hierarchy", NULL, ImGuiWindowFlags_NoResize);
+        ImGui::End();
+
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         SDL_GL_SwapWindow(window);
