@@ -5,8 +5,8 @@
 #include <glm/glm.hpp>
 #include <string>
 
-#include "engine/components/transform.hpp"
-#include "engine/components/mesh.hpp"
+#include "engine/include/components/transform.hpp"
+#include "engine/include/components/mesh.hpp"
 
 class ModelLoader {
     public:

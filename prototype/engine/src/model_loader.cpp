@@ -13,10 +13,10 @@
 #include <string>
 #include <vector>
 
-#include "engine/renderer/model_loader.hpp"
+#include "engine/include/renderer/model_loader.hpp"
 
-#include "engine/components/transform.hpp"
-#include "engine/components/mesh.hpp"
+#include "engine/include/components/transform.hpp"
+#include "engine/include/components/mesh.hpp"
 
 ModelLoader::ModelLoader(unsigned int shader) {
     shaderProgram = shader;
@@ -102,4 +102,3 @@ void ModelLoader::DrawMesh(Transform& transform, Mesh& mesh) {
 void ModelLoader::Cleanup() {
 
 }
-

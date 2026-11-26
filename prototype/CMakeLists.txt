@@ -71,25 +71,23 @@ if(NOT imgui_FOUND)
     add_library(imgui::imgui ALIAS imgui)
 endif()
 
-file(GLOB_RECURSE ENGINE_SOURCES
-    src/*.cpp
-    src/*.c
-    tests/*.cpp
+# Only glob your own source directories (never the whole project tree including build/)
+file(GLOB_RECURSE ENGINE_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/engine/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
 )
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-file(GLOB_RECURSE ENGINE_SOURCES
-    src/*.cpp
-    src/*.c
+add_library(EngineCore STATIC
+    ${ENGINE_SOURCES}
+    "${CMAKE_CURRENT_SOURCE_DIR}/glad.c"
 )
-list(REMOVE_ITEM ENGINE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
-
-add_library(EngineCore STATIC ${ENGINE_SOURCES})
 
 target_include_directories(EngineCore PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/engine/include
     ${CMAKE_CURRENT_SOURCE_DIR}/lib
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_link_libraries(EngineCore PUBLIC
@@ -109,7 +107,7 @@ elseif(UNIX)
     target_link_libraries(EngineCore PRIVATE OpenGL::GL Threads::Threads dl)
 endif()
 
-add_executable(run src/main.cpp)
+add_executable(run main.cpp)
 target_link_libraries(run PRIVATE EngineCore)
 
 add_executable(test_engine_components tests/test.cpp)

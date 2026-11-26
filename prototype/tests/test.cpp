@@ -1,9 +1,9 @@
 #include <iostream>
 #include <glm/glm.hpp>
 
-#include "engine/ecs_core/entity_manager.hpp"
-#include "engine/ecs_core/component_manager.hpp"
-#include "engine/components/transform.hpp"
+#include "engine/include/ecs_core/entity_manager.hpp"
+#include "engine/include/ecs_core/component_manager.hpp"
+#include "engine/include/components/transform.hpp"
 
 
 void testBasicECS() {

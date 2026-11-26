@@ -7,16 +7,14 @@
 
 #include <SDL3/SDL.h>
 
-#include "imgui.h"
 #include "backends/imgui_impl_sdl3.h"
-#include "backends/imgui_impl_opengl3.h"
 
-#include "engine/ecs_core/component_manager.hpp"
-#include "engine/ecs_core/entity_manager.hpp"
-#include "engine/components/transform.hpp"
-#include "engine/components/mesh.hpp"
-
-#include "engine/renderer/model_loader.hpp"
+#include "engine/include/ecs_core/component_manager.hpp"
+#include "engine/include/ecs_core/entity_manager.hpp"
+#include "engine/include/components/transform.hpp"
+#include "engine/include/components/mesh.hpp"
+#include "engine/include/renderer/model_loader.hpp"
+#include "engine/include/renderer/interface.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -174,17 +172,7 @@ int main() {
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << "\n";
     std::cout << "Renderer: " << glGetString(GL_RENDERER) << "\n";
 
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-
-    ImGuiStyle& style = ImGui::GetStyle();
-    ImGui::StyleColorsDark();
-
-    ImGui_ImplSDL3_InitForOpenGL(window, glContext);
-    ImGui_ImplOpenGL3_Init();
+    Interface::createInterface(window, &glContext);
 
     glViewport(0, 0, WIDTH, HEIGHT);
 
@@ -231,7 +219,7 @@ int main() {
         float y = (row - 4.5f) * 0.38f; 
         float z = ((i % 5) - 2.0f) * 0.15f;
 
-        // Random color is assinged to a hashmap 
+        // Random color is assinged 
         glm::vec3 randomColor(
             0.2f + static_cast<float>(rand()) / RAND_MAX * 0.8f,
             0.2f + static_cast<float>(rand()) / RAND_MAX * 0.8f,
@@ -294,69 +282,11 @@ int main() {
             modelLoader.DrawMesh(transform, mesh);
         }
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplSDL3_NewFrame();
-        ImGui::NewFrame();
-        ImGui::BeginMainMenuBar();
-
-        if (ImGui::BeginMenu("Insert")) {
-            if (ImGui::MenuItem("Cube")) {
-                Entity newCube = manager.CreateEntity();
-
-                components.AddComponent<Transform>(newCube, 0.0, 0.0, 0.0, 0.0, 45.0, 0.0, 1.0, 1.0, 1.0);
-                components.AddComponent<Mesh>(newCube, vertexList, indexList, glm::vec3(1, 0, 0));
-                modelLoader.SetupMesh(components.GetComponent<Mesh>(newCube));
-            }
-            ImGui::EndMenu();
-        }
-        
-        ImGui::Separator();
-
-        // Manipulate dropdown which lets you edit an entity
-        if (ImGui::BeginMenu("Manipulate")) {
-            ImGui::SliderInt("Target ID", &targetEntityID, 0, entities.size() - 1);
-            // try statement incase enetity has no Transform component
-            try {
-                Transform& target = components.GetComponent<Transform>(entities[targetEntityID]);
-
-                float pos[3] = {target.xPos, target.yPos, target.zPos};
-                float rot[3] = {target.xRot, target.yRot, target.zRot};
-                float scale[3] = {target.xScale, target.yScale, target.zScale};
-                if(ImGui::DragFloat3("Position", pos, 0.01f)) {
-                    target.xPos = pos[0];
-                    target.yPos = pos[1];
-                    target.zPos = pos[2];
-                }
-
-                if(ImGui::DragFloat3("Rotation", rot, 0.01f)) {
-                    target.xRot = rot[0];
-                    target.yRot = rot[1];
-                    target.zRot = rot[2];
-                }
-
-                if(ImGui::DragFloat3("Scale", scale, 0.01f)) {
-                    target.xScale = scale[0];
-                    target.yScale = scale[1];
-                    target.zScale = scale[2];
-                }
-            }
-            catch(const std::runtime_error& e) {
-                ImGui::Text("%s on id: %d", e.what(), targetEntityID);
-            }
-            ImGui::EndMenu();
-        }
-
-	ImGui::Separator();
-        ImGui::Text("%.1f FPS", io.Framerate);
-        ImGui::EndMainMenuBar();
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        Interface::displayInterface(manager, components, modelLoader);
         SDL_GL_SwapWindow(window);
     }
 
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplSDL3_Shutdown();
-    ImGui::DestroyContext();
+    Interface::destroyInterface();
 
     SDL_GL_DestroyContext(glContext);
     SDL_DestroyWindow(window);
