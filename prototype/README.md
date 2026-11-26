@@ -2,6 +2,47 @@
 
 Proof-of-concept code for 〈Constrained Hardware/ECS architecture Game Engine〉.
 
+## Setting up environment for Windows
+
+To install cmake type this command into powershell
+```bash
+winget install Kitware.CMake
+```
+Refresh terminal and type this command to confirm installation
+```bash
+cmake --version
+```    
+
+To install Ninja type this command into powershell
+```bash
+winget install Ninja-build.Ninja
+```
+Refresh terminal and type this command to confirm installation
+```bash
+Ninja --version
+```
+
+To install C++26 
+    Click this link to install MSYS64 (follow its installation steps) - https://www.msys2.org/  
+    Come back here when you successfully installed MSYS64, then continue below
+
+Open up the MSYS2 UCRT64 terminal and type in these commands 
+```bash
+pacman -Syu
+pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
+```
+
+Add compiler path to evnironment variable 
+        Press the Windows key and R key   
+        Type sysdm.cpl into the box   
+        Click on the advanced tab 
+        Click on environment variables  
+        Under the the little window that says System Variables, double click on Path  
+        Click new, then type in the file path of where the file is installed    
+          GCC/G++ default path should something like this - C:\msys64\ucrt64\bin
+          If your default path is different, use that one   
+        After applying the changes, you should be good to build the project   
+
 ## How to build
 
 ```bash
