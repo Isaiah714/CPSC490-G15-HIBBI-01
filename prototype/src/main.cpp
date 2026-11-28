@@ -13,15 +13,18 @@
 
 #include "engine/ecs_core/component_manager.hpp"
 #include "engine/ecs_core/entity_manager.hpp"
+#include "engine/components/camera.hpp"
 #include "engine/components/transform.hpp"
 #include "engine/components/mesh.hpp"
 
+#include "engine/core_system/orbit_camera_system.hpp"
 #include "engine/renderer/model_loader.hpp"
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <algorithm>
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
@@ -83,18 +86,6 @@ unsigned int indices[] = {
 
 // Light Data
 //glm::vec3 lightPos = glm::vec3(-3.0f, 3.0f, 2.0f);
-
-// Camera Data
-/*
-float camRad = 5.0f;
-glm::vec3 camTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-float camYaw = 0.0f;
-float camPitch = 45.0f;
-glm::vec3 cameraPos = glm::vec3(camRad * std::sin(glm::radians(camYaw)) * std::cos(glm::radians(camPitch)) + camTarget.x,
-                                camRad * std::sin(glm::radians(camPitch)) + camTarget.y,
-                                camRad * std::cos(glm::radians(camYaw)) * std::cos(glm::radians(camPitch)) + camTarget.z);
-float fieldOfView = 45.0f;
-*/
 
 /**
  * @brief Compiles a shader from a given source file path
@@ -214,6 +205,19 @@ int main() {
 
     ModelLoader modelLoader(shaderProgram);
 
+    // Create camera entity and attach components
+    const Entity cameraEntity = manager.CreateEntity();
+    components.AddComponent<Camera>(cameraEntity);
+    components.AddComponent<OrbitCamera>(cameraEntity);
+    components.AddComponent<ActiveCamera>(cameraEntity);
+    components.AddComponent<Transform>(
+        cameraEntity,
+        0.0f, 0.0f, 5.0f,
+        0.0f, 0.0f, 0.0f,
+        1.0f, 1.0f, 1.0f
+    );
+    OrbitCameraSystem orbitCameraSystem;
+
     std::vector<float> vertexList(std::begin(vertices), std::end(vertices));
     std::vector<unsigned int> indexList(std::begin(indices), std::end(indices));
 
@@ -256,6 +260,11 @@ int main() {
         lastTime = currentTime;
         while (SDL_PollEvent(&event)) {
             ImGui_ImplSDL3_ProcessEvent(&event);
+            // Capture mouse inputs
+            if (!ImGui::GetIO().WantCaptureMouse || event.type == SDL_EVENT_MOUSE_MOTION || event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
+                // Process mouse inputs for orbital camera system
+                orbitCameraSystem.ProcessEvent(components, event);
+            }
             if (event.type == SDL_EVENT_QUIT) {
                 isRunning = false;
             }
@@ -266,8 +275,17 @@ int main() {
             }
         }
 
-        // Get all entities to give a simple rotation animation
-        auto entities = components.GetEntitiesWith<Transform>();
+        // Get current window size and pass to camera data
+        int drawableWidth = 0;
+        int drawableHeight = 0;
+        SDL_GetWindowSizeInPixels(window, &drawableWidth, &drawableHeight);
+        glViewport(0, 0, drawableWidth, drawableHeight);
+        
+        // Update the orbital camera system
+        orbitCameraSystem.Update(components, drawableWidth, drawableHeight);
+
+        // Get all entities with a mesh to give a simple rotation animation
+        auto entities = components.GetEntitiesWith<Transform, Mesh>();
         int i = 0;
         float totalTime = currentTime * 0.001f;
         for(Entity entity : entities) {
@@ -285,13 +303,17 @@ int main() {
 
         glUseProgram(shaderProgram);
 
+        // Get the active camera or throw error if there is none
+        const std::vector<Entity>& camera = components.GetEntitiesWith<Camera, ActiveCamera, Transform>();
+        if (camera.empty()) throw std::invalid_argument("No active camera exists!");
+        
         // Model matrix with cube rotated 45 degrees
         // Get all entities with transform components, and render them
         for (Entity entity : entities) {
             auto& transform = components.GetComponent<Transform>(entity);
             auto& mesh = components.GetComponent<Mesh>(entity);
-
-            modelLoader.DrawMesh(transform, mesh);
+            
+            modelLoader.DrawMesh(transform, mesh, components.GetComponent<Camera>(camera[0]));
         }
 
         ImGui_ImplOpenGL3_NewFrame();
