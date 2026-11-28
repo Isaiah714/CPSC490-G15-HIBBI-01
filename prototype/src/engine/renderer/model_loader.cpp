@@ -77,7 +77,7 @@ void ModelLoader::SetupMesh(Mesh& mesh) {
  * @param Transform component for the mesh rendered
  * @param Mesh component for the actual apperance
  */
-void ModelLoader::DrawMesh(Transform& transform, Mesh& mesh) {
+void ModelLoader::DrawMesh(Transform& transform, Mesh& mesh, const Camera& camera) {
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(transform.xPos, transform.yPos, transform.zPos));
@@ -87,8 +87,8 @@ void ModelLoader::DrawMesh(Transform& transform, Mesh& mesh) {
     model = glm::scale(model, glm::vec3(transform.xScale, transform.yScale, transform.zScale));
 
     // Push matrices to shader
-    glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(camera.projection));
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera.view));
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
     glUniform3fv(colorLoc, 1, glm::value_ptr(mesh.color));
